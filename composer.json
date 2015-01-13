@@ -1,0 +1,28 @@
+{
+    "name": "montealegreluis/simple-form-examples",
+    "description": "Examples of usage for comphppuebla/simple-form package.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Luis Montealegre",
+            "email": "luis.montealegre@mandragora-web-systems.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin/"
+    },
+    "require": {
+        "comphppuebla/simple-form": "1.0.*@dev",
+        "symfony/security-csrf": "~2.6",
+        "twig/twig": "~1.16",
+        "zendframework/zend-captcha": "~2.3",
+        "zendframework/zend-inputfilter": "~2.3",
+        "zendframework/zend-session": "~2.3",
+        "zendframework/zend-eventmanager": "~2.3"
+    }
+}

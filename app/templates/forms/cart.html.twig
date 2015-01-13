@@ -1,0 +1,11 @@
+{{ form_start(cart, {'action': 'cart.php'}) }}
+
+{{ element_row(cart.product, {'label': 'Choose a product', 'attr': {'id': 'product'}}) }}
+
+{{ element_row(cart.quantity, {'label': 'Quantity', 'attr': {'id': 'quantity'}}) }}
+
+<button type="submit" class="btn btn-default">
+    <span class="glyphicon glyphicon-shopping-cart"></span> Add to cart
+</button>
+
+{{ form_end() }}

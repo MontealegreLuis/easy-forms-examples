@@ -1,0 +1,15 @@
+{{ form_start(login, {'action': 'validation.php'}) }}
+
+{{ element_row(login.username, {'label': 'Username', 'attr': {'id': 'username'}}) }}
+
+{{ element_row(login.password, {'label': 'Password', 'attr': {'id': 'password'}}) }}
+
+{{ element_row(login.remember_me, {'label': 'Remember me'}) }}
+
+{{ element_row(login.csrf_token) }}
+
+<button type="submit" class="btn btn-default">
+    <span class="glyphicon glyphicon-user"></span> Login
+</button>
+
+{{ form_end() }}

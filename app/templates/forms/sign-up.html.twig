@@ -1,0 +1,23 @@
+{{ form_start(signUp, {'action': 'save-file.php'}) }}
+
+{{ element_row(signUp.name, {'label': 'Name', 'attr': {'id': 'name'}}) }}
+
+{{ element_row(signUp.username, {'label': 'Username', 'attr': {'id': 'username'}}) }}
+
+{{ element_row(signUp.password, {'label': 'Password', 'attr': {'id': 'password'}}) }}
+
+{{ element_row(signUp.about_you, {'label': 'About you', 'attr': {'id': 'about-you'}}) }}
+
+{{ element_row(signUp.avatar, {'label': 'Avatar', 'attr': {'id': 'avatar'}}) }}
+
+{{ element_row(signUp.gender, {'label': 'Gender'}) }}
+
+{{ element_row(signUp.captcha, {'label': 'Please type this word below'}) }}
+
+{{ element_row(signUp.newsletter, {'label': 'Newsletter', 'attr': {'id': 'newsletter'}}) }}
+
+<button type="submit" class="btn btn-default">
+    <span class="glyphicon glyphicon-user"></span> Sign up
+</button>
+
+{{ form_end() }}

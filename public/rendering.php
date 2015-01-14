@@ -3,14 +3,12 @@
  * PHP version 5.5
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
- *
- * @copyright  Mandrágora Web-Based Systems 2014 (http://www.mandragora-web-systems.com)
  */
 require __DIR__ . '/../vendor/autoload.php';
 
-use Example\Forms\LoginForm;
-use Example\Forms\SignUpForm;
-use Example\Forms\Filters\LoginFilter;
+use ExampleForms\LoginForm;
+use ExampleForms\SignUpForm;
+use ExampleForms\Filters\LoginFilter;
 use Forms\Bridges\SymfonyCsrf\CsrfTokenProvider;
 use Forms\Bridges\Twig\FormExtension;
 use Forms\Bridges\Twig\FormRenderer;

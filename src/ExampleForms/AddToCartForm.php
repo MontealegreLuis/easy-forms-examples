@@ -6,7 +6,7 @@
  */
 namespace ExampleForms;
 
-use Example\Forms\Configuration\AddToCartConfiguration;
+use ExampleForms\Configuration\AddToCartConfiguration;
 use Forms\Elements\Select;
 use Forms\Elements\Text;
 use Forms\Form;

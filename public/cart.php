@@ -3,14 +3,12 @@
  * PHP version 5.5
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
- *
- * @copyright  Mandrágora Web-Based Systems 2015 (http://www.mandragora-web-systems.com)
  */
 require __DIR__ . '/../vendor/autoload.php';
 
-use Example\Forms\AddToCartForm;
-use Example\Forms\Configuration\AddToCartConfiguration;
-use Example\Forms\Filters\AddToCartFilter;
+use ExampleForms\AddToCartForm;
+use ExampleForms\Configuration\AddToCartConfiguration;
+use ExampleForms\Filters\AddToCartFilter;
 use Forms\Bridges\Twig\FormExtension;
 use Forms\Bridges\Twig\FormRenderer;
 use Forms\Bridges\Zend\InputFilter\InputFilterValidator;

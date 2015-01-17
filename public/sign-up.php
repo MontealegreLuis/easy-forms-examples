@@ -7,9 +7,9 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use ExampleForms\SignUpForm;
-use Forms\Bridges\Twig\FormExtension;
-use Forms\Bridges\Twig\FormRenderer;
-use Forms\Bridges\Zend\Captcha\ImageCaptchaAdapter;
+use EasyForms\Bridges\Twig\FormExtension;
+use EasyForms\Bridges\Twig\FormRenderer;
+use EasyForms\Bridges\Zend\Captcha\ImageCaptchaAdapter;
 use Zend\Captcha\Image;
 
 $signUpForm = new SignUpForm(new ImageCaptchaAdapter(new Image([

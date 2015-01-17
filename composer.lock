@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3f24be3779027635a8dcc108c50dc957",
+    "hash": "b8e31d8be0cbc3115c87b59306e4c340",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -56,24 +56,26 @@
             "time": "2014-12-18 19:12:40"
         },
         {
-            "name": "comphppuebla/simple-form",
+            "name": "comphppuebla/easy-forms",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ComPHPPuebla/simple-form.git",
-                "reference": "8cfd3d99b771f7d414a45a92e8dc6f29d0ee0877"
+                "url": "https://github.com/ComPHPPuebla/easy-forms.git",
+                "reference": "90db572d4363d12d12619cb1d9e7acc138857578"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ComPHPPuebla/simple-form/zipball/8cfd3d99b771f7d414a45a92e8dc6f29d0ee0877",
-                "reference": "8cfd3d99b771f7d414a45a92e8dc6f29d0ee0877",
+                "url": "https://api.github.com/repos/ComPHPPuebla/easy-forms/zipball/90db572d4363d12d12619cb1d9e7acc138857578",
+                "reference": "90db572d4363d12d12619cb1d9e7acc138857578",
                 "shasum": ""
             },
             "require": {
-                "beberlei/assert": "~2.3"
+                "beberlei/assert": "~2.3",
+                "php": ">=5.5"
             },
             "require-dev": {
                 "phpspec/phpspec": "~2.1",
+                "phpunit/phpunit": "~4.4",
                 "symfony/security-csrf": "~2.6",
                 "twig/twig": "~1.16",
                 "zendframework/zend-captcha": "~2.3",
@@ -87,7 +89,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "Forms": "src/"
+                    "EasyForms": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -100,8 +102,57 @@
                     "email": "montealegreluis@gmail.com"
                 }
             ],
-            "description": "Simple form handling",
-            "time": "2015-01-13 17:15:18"
+            "description": "Easy forms processing",
+            "keywords": [
+                "Forms"
+            ],
+            "time": "2015-01-16 01:32:30"
+        },
+        {
+            "name": "slim/slim",
+            "version": "2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codeguy/Slim.git",
+                "reference": "04958a10ed95bc7bc97568e573877d4f9b62db48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codeguy/Slim/zipball/04958a10ed95bc7bc97568e573877d4f9b62db48",
+                "reference": "04958a10ed95bc7bc97568e573877d4f9b62db48",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "ext-mcrypt": "Required for HTTP cookie encryption"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Slim": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Lockhart",
+                    "email": "info@joshlockhart.com",
+                    "homepage": "http://www.joshlockhart.com/"
+                }
+            ],
+            "description": "Slim Framework, a PHP micro framework",
+            "homepage": "http://github.com/codeguy/Slim",
+            "keywords": [
+                "microframework",
+                "rest",
+                "router"
+            ],
+            "time": "2014-12-09 19:59:29"
         },
         {
             "name": "symfony/security-core",
@@ -222,16 +273,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.16.3",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "6dc11a1e8ecfc30e2c68aaeb218148409d8e68af"
+                "reference": "2493970fa4d587eca73f77e6d8bd48a8bdd4c608"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6dc11a1e8ecfc30e2c68aaeb218148409d8e68af",
-                "reference": "6dc11a1e8ecfc30e2c68aaeb218148409d8e68af",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/2493970fa4d587eca73f77e6d8bd48a8bdd4c608",
+                "reference": "2493970fa4d587eca73f77e6d8bd48a8bdd4c608",
                 "shasum": ""
             },
             "require": {
@@ -240,7 +291,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.16-dev"
+                    "dev-master": "1.17-dev"
                 }
             },
             "autoload": {
@@ -275,7 +326,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-12-25 19:58:19"
+            "time": "2015-01-14 10:15:49"
         },
         {
             "name": "zendframework/zend-captcha",
@@ -703,7 +754,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "comphppuebla/simple-form": 20
+        "comphppuebla/easy-forms": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

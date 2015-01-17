@@ -20,7 +20,7 @@ class AddToCartConfiguration
     /**
      * @param Catalog $catalog
      */
-    function __construct(Catalog $catalog)
+    public function __construct(Catalog $catalog)
     {
         $this->catalog = $catalog;
     }

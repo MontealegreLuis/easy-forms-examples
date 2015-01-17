@@ -1,27 +1,25 @@
 {% extends 'layouts/base.html.twig' %}
 
 {% block content %}
-<div class="page-header">
-    <h1>Welcome!</h1>
-</div>
+    <div class="page-header">
+        <h1>Easy forms examples</h1>
+    </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">Login</div>
-            <div class="panel-body">
-                {% include 'forms/login.html.twig' %}
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+           <ul>
+               <li>
+                   Rendering examples
+                   <ul>
+                       <li><a href="/theme/default">Default theme</a></li>
+                       <li><a href="/theme/bootstrap3">Bootstrap 3 theme</a></li>
+                       <li><a href="/theme/form">Custom theme extended from Bootstrap 3</a></li>
+                   </ul>
+               </li>
+               <li><a href="sign-up.php">Sign up</a></li>
+               <li><a href="cart.php">Cart</a></li>
+           </ul>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">Sign up</div>
-            <div class="panel-body">
-                {% include 'forms/sign-up.html.twig' %}
-            </div>
-        </div>
-    </div>
-</div>
 
 {% endblock %}

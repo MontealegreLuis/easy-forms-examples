@@ -6,8 +6,8 @@
  */
 namespace ExampleForms\Filters;
 
-use Forms\Bridges\Zend\InputFilter\Validator\CsrfValidator;
-use Forms\Elements\Csrf\TokenProvider;
+use EasyForms\Bridges\Zend\InputFilter\Validator\CsrfValidator;
+use EasyForms\Elements\Csrf\TokenProvider;
 use Zend\Filter\StringTrim;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;

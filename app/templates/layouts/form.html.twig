@@ -1,0 +1,6 @@
+{% extends 'layouts/bootstrap3.html.twig' %}
+
+{% block label -%}
+    {{ parent() }}
+    {%- if is_required -%}&nbsp;<small><span class="text-muted">(required)</span></small>{%- endif -%}
+{%- endblock label %}

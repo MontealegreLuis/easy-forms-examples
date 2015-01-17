@@ -24,7 +24,7 @@ class Product
      * @param float $unitPrice
      * @param string $name
      */
-    function __construct($productId, $unitPrice, $name)
+    public function __construct($productId, $unitPrice, $name)
     {
         $this->productId = $productId;
         $this->unitPrice = $unitPrice;

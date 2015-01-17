@@ -6,15 +6,15 @@
  */
 namespace ExampleForms;
 
-use Forms\Elements\Captcha\CaptchaAdapter;
-use Forms\Elements\Captcha;
-use Forms\Elements\File;
-use Forms\Elements\Password;
-use Forms\Elements\Radio;
-use Forms\Elements\Select;
-use Forms\Elements\Text;
-use Forms\Elements\TextArea;
-use Forms\Form;
+use EasyForms\Elements\Captcha\CaptchaAdapter;
+use EasyForms\Elements\Captcha;
+use EasyForms\Elements\File;
+use EasyForms\Elements\Password;
+use EasyForms\Elements\Radio;
+use EasyForms\Elements\Select;
+use EasyForms\Elements\Text;
+use EasyForms\Elements\TextArea;
+use EasyForms\Form;
 
 class SignUpForm extends Form
 {

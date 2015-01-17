@@ -6,7 +6,7 @@
  */
 namespace ExampleForms\Filters;
 
-use Example\Forms\Configuration\AddToCartConfiguration;
+use ExampleForms\Configuration\AddToCartConfiguration;
 use Zend\Filter\Int;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;

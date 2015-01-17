@@ -6,12 +6,12 @@
  */
 namespace ExampleForms;
 
-use Forms\Elements\Csrf\TokenProvider;
-use Forms\Elements\Text;
-use Forms\Elements\Password;
-use Forms\Elements\Checkbox;
-use Forms\Elements\Csrf;
-use Forms\Form;
+use EasyForms\Elements\Csrf\TokenProvider;
+use EasyForms\Elements\Text;
+use EasyForms\Elements\Password;
+use EasyForms\Elements\Checkbox;
+use EasyForms\Elements\Csrf;
+use EasyForms\Form;
 
 class LoginForm extends Form
 {

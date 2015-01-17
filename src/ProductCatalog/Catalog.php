@@ -18,7 +18,7 @@ class Catalog
     /**
      * Initialize an empty list of products
      */
-    function __construct()
+    public function __construct()
     {
         $this->products = new SplObjectStorage();
     }

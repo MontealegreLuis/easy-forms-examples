@@ -8,10 +8,12 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use ExampleForms\LoginForm;
 use ExampleForms\Filters\LoginFilter;
-use Forms\Bridges\SymfonyCsrf\CsrfTokenProvider;
-use Forms\Bridges\Twig\FormExtension;
-use Forms\Bridges\Twig\FormRenderer;
-use Forms\Bridges\Zend\InputFilter\InputFilterValidator;
+use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
+use EasyForms\Bridges\Twig\BlockOptions;
+use EasyForms\Bridges\Twig\FormExtension;
+use EasyForms\Bridges\Twig\FormRenderer;
+use EasyForms\Bridges\Twig\FormTheme;
+use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
 use Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator;
 use Symfony\Component\Security\Csrf\TokenStorage\NativeSessionTokenStorage;
@@ -27,7 +29,7 @@ $validator = new InputFilterValidator(new LoginFilter($tokenProvider));
 $isValid = $validator->validate($form);
 
 $loader = new Twig_Loader_Filesystem([
-    __DIR__ . '/../vendor/comphppuebla/simple-form/src/Forms/Bridges/Twig',
+    __DIR__ . '/../vendor/comphppuebla/easy-forms/src/EasyForms/Bridges/Twig',
     __DIR__ . '/../app/templates',
 ]);
 $environment = new Twig_Environment($loader, [
@@ -35,7 +37,8 @@ $environment = new Twig_Environment($loader, [
     'debug' => true,
     'strict_variables' => true,
 ]);
-$environment->addExtension(new FormExtension(new FormRenderer($environment, 'forms/form.html.twig')));
+$theme = new FormTheme($environment, ['layouts/form.html.twig']);
+$environment->addExtension(new FormExtension(new FormRenderer($theme, new BlockOptions())));
 
 echo $environment->render('validation.html.twig', [
     'login' => $form->buildView(),

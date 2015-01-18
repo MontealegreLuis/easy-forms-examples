@@ -9,9 +9,11 @@ require __DIR__ . '/../vendor/autoload.php';
 use ExampleForms\AddToCartForm;
 use ExampleForms\Configuration\AddToCartConfiguration;
 use ExampleForms\Filters\AddToCartFilter;
-use Forms\Bridges\Twig\FormExtension;
-use Forms\Bridges\Twig\FormRenderer;
-use Forms\Bridges\Zend\InputFilter\InputFilterValidator;
+use EasyForms\Bridges\Twig\BlockOptions;
+use EasyForms\Bridges\Twig\FormExtension;
+use EasyForms\Bridges\Twig\FormRenderer;
+use EasyForms\Bridges\Twig\FormTheme;
+use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
 use ProductCatalog\Catalog;
 use ProductCatalog\Product;
 
@@ -37,7 +39,7 @@ if ($_POST) {
 
 
 $loader = new Twig_Loader_Filesystem([
-    __DIR__ . '/../vendor/comphppuebla/simple-form/src/Forms/Bridges/Twig',
+    __DIR__ . '/../vendor/comphppuebla/easy-forms/src/EasyForms/Bridges/Twig',
     __DIR__ . '/../app/templates',
 ]);
 $environment = new Twig_Environment($loader, [
@@ -45,7 +47,8 @@ $environment = new Twig_Environment($loader, [
     'debug' => true,
     'strict_variables' => true,
 ]);
-$environment->addExtension(new FormExtension(new FormRenderer($environment, 'forms/form.html.twig')));
+$theme = new FormTheme($environment, ['layouts/form.html.twig']);
+$environment->addExtension(new FormExtension(new FormRenderer($theme, new BlockOptions())));
 
 echo $environment->render('cart.html.twig', [
     'cart' => $shoppingCartForm->buildView(),

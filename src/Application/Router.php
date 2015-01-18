@@ -6,8 +6,10 @@
  */
 namespace Application;
 
+use EasyForms\Bridges\Twig\BlockOptions;
 use EasyForms\Bridges\Twig\FormExtension;
 use EasyForms\Bridges\Twig\FormRenderer;
+use EasyForms\Bridges\Twig\FormTheme;
 use Slim\Slim;
 
 class Router
@@ -25,11 +27,26 @@ class Router
                 $app->notFound();
             }
 
-            $app->twig->addExtension(new FormExtension(new FormRenderer($app->twig, "layouts/$layoutName.html.twig")));
+            $renderer = new FormRenderer(
+                new FormTheme($app->twig, ["layouts/$layoutName.html.twig"]), new BlockOptions()
+            );
+            $app->twig->addExtension(new FormExtension($renderer));
 
             echo $app->twig->render('examples/layout.html.twig', [
                 'twitter' => $app->tweetForm->buildView(),
                 'layoutName' => $layoutName,
+            ]);
+        });
+
+        $app->get('/inline-theme', function () use ($app) {
+
+            $renderer = new FormRenderer(
+                new FormTheme($app->twig, ["layouts/form.html.twig"]), new BlockOptions()
+            );
+            $app->twig->addExtension(new FormExtension($renderer));
+
+            echo $app->twig->render('examples/inline-layout.html.twig', [
+                'product' => $app->addProductForm->buildView(),
             ]);
         });
     }

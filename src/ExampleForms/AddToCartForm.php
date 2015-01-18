@@ -7,9 +7,9 @@
 namespace ExampleForms;
 
 use ExampleForms\Configuration\AddToCartConfiguration;
-use Forms\Elements\Select;
-use Forms\Elements\Text;
-use Forms\Form;
+use EasyForms\Elements\Select;
+use EasyForms\Elements\Text;
+use EasyForms\Form;
 
 class AddToCartForm extends Form
 {

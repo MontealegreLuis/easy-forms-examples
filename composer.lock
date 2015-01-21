@@ -61,12 +61,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ComPHPPuebla/easy-forms.git",
-                "reference": "b40dd9257676b716b5d206410867307f4aaa3ba8"
+                "reference": "7efb0b8169f6c4f04f28a4e408d055645edba004"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ComPHPPuebla/easy-forms/zipball/b40dd9257676b716b5d206410867307f4aaa3ba8",
-                "reference": "b40dd9257676b716b5d206410867307f4aaa3ba8",
+                "url": "https://api.github.com/repos/ComPHPPuebla/easy-forms/zipball/7efb0b8169f6c4f04f28a4e408d055645edba004",
+                "reference": "7efb0b8169f6c4f04f28a4e408d055645edba004",
                 "shasum": ""
             },
             "require": {
@@ -106,7 +106,7 @@
             "keywords": [
                 "Forms"
             ],
-            "time": "2015-01-18 15:57:47"
+            "time": "2015-01-21 17:47:04"
         },
         {
             "name": "slim/slim",

@@ -28,7 +28,7 @@ class Router
             }
 
             $renderer = new FormRenderer(
-                new FormTheme($app->twig, ["layouts/$layoutName.html.twig"]), new BlockOptions()
+                new FormTheme($app->twig, "layouts/$layoutName.html.twig"), new BlockOptions()
             );
             $app->twig->addExtension(new FormExtension($renderer));
 
@@ -41,7 +41,7 @@ class Router
         $app->get('/inline-theme', function () use ($app) {
 
             $renderer = new FormRenderer(
-                new FormTheme($app->twig, ["layouts/form.html.twig"]), new BlockOptions()
+                new FormTheme($app->twig, "layouts/form.html.twig"), new BlockOptions()
             );
             $app->twig->addExtension(new FormExtension($renderer));
 

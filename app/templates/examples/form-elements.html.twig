@@ -1,23 +1,18 @@
 {% extends 'layouts/base.html.twig' %}
 
 {% block content %}
-
     <div class="page-header">
         <h1>Welcome!</h1>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-
-            <p>This example shows the rendering of a form using the {{ layoutName }} layout.</p>
-
             <div class="panel panel-default">
-                <div class="panel-heading">Tweet</div>
+                <div class="panel-heading">Login</div>
                 <div class="panel-body">
-                    {% include 'forms/tweet.html.twig' %} {# The tweet form #}
+                    {% include 'forms/sign-up.html.twig' %} {# The sign-up form #}
                 </div>
             </div>
-
         </div>
     </div>
 

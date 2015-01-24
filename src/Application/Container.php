@@ -9,6 +9,7 @@ namespace Application;
 use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
 use ExampleForms\AddProductForm;
 use ExampleForms\LoginForm;
+use ExampleForms\SignUpForm;
 use ExampleForms\TweetForm;
 use Slim\Slim;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
@@ -42,6 +43,10 @@ class Container
 
         $app->container->singleton('addProductForm', function () use ($app) {
             return new AddProductForm();
+        });
+
+        $app->container->singleton('signUpForm', function () use ($app) {
+            return new SignUpForm();
         });
 
         $app->container->singleton('loginForm', function () use ($app) {

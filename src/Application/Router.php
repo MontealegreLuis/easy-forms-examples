@@ -23,7 +23,7 @@ class Router
 
         $app->get('/theme/:layoutName', function ($layoutName) use ($app) {
 
-            if (!in_array($layoutName, ['default', 'bootstrap3', 'form'])) {
+            if (!in_array($layoutName, ['default', 'bootstrap3', 'required', 'optional'])) {
                 $app->notFound();
             }
 
@@ -40,13 +40,21 @@ class Router
 
         $app->get('/inline-theme', function () use ($app) {
 
-            $renderer = new FormRenderer(
-                new FormTheme($app->twig, "layouts/form.html.twig"), new BlockOptions()
-            );
+            $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/required.html.twig"), new BlockOptions());
             $app->twig->addExtension(new FormExtension($renderer));
 
             echo $app->twig->render('examples/inline-layout.html.twig', [
                 'product' => $app->addProductForm->buildView(),
+            ]);
+        });
+
+        $app->get('/sign-up', function () use ($app) {
+
+            $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/optional.html.twig"), new BlockOptions());
+            $app->twig->addExtension(new FormExtension($renderer));
+
+            echo $app->twig->render('examples/form-elements.html.twig', [
+                'signUp' => $app->signUpForm->buildView(),
             ]);
         });
     }

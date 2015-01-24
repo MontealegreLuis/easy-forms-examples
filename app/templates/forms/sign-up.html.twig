@@ -1,10 +1,10 @@
 {{ form_start(signUp, {'action': 'save-file.php'}) }}
 
-{{ element_row(signUp.name, {'label': 'Name', 'attr': {'id': 'name'}}) }}
-
 {{ element_row(signUp.username, {'label': 'Username', 'attr': {'id': 'username'}}) }}
 
 {{ element_row(signUp.password, {'label': 'Password', 'attr': {'id': 'password'}}) }}
+
+{{ element_row(signUp.confirm_password, {'label': 'Repeat your password', 'attr': {'id': 'name'}}) }}
 
 {{ element_row(signUp.about_you, {'label': 'About you', 'attr': {'id': 'about-you'}}) }}
 
@@ -12,10 +12,15 @@
 
 {{ element_row(signUp.gender, {'label': 'Gender'}) }}
 
-{{ element_row(signUp.captcha, {'label': 'Please type this word below'}) }}
+{{ element_row(signUp.languages, {'label': 'Favorite programming languages', 'attr': {'id': 'languages'}}) }}
 
-{{ element_row(signUp.newsletter, {'label': 'Newsletter', 'attr': {'id': 'newsletter'}}) }}
+{{ element_row(signUp.topics, {'label': 'I am interested in'}) }}
 
+{{ element_row(signUp.role, {'label': 'I am a', 'attr': {'id': 'role'}}) }}
+
+{{ element_row(signUp.terms, {'label': 'I accept the terms and conditions', 'attr': {'id': 'terms'}}) }}
+
+<br>
 <button type="submit" class="btn btn-default">
     <span class="glyphicon glyphicon-user"></span> Sign up
 </button>

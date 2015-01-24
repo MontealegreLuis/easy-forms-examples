@@ -24,7 +24,7 @@ class SignUpFilter extends InputFilter
     public function __construct(AdapterInterface $captchaAdapter)
     {
         $this->add($this->buildAvatarInput());
-        $this->add($this->buildCaptchaInput($captchaAdapter));
+        //$this->add($this->buildCaptchaInput($captchaAdapter));
     }
 
     /**

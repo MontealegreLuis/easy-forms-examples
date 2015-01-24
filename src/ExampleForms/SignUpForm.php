@@ -6,9 +6,10 @@
  */
 namespace ExampleForms;
 
-use EasyForms\Elements\Captcha\CaptchaAdapter;
 use EasyForms\Elements\Captcha;
+use EasyForms\Elements\Checkbox;
 use EasyForms\Elements\File;
+use EasyForms\Elements\MultiCheckbox;
 use EasyForms\Elements\Password;
 use EasyForms\Elements\Radio;
 use EasyForms\Elements\Select;
@@ -16,27 +17,47 @@ use EasyForms\Elements\Text;
 use EasyForms\Elements\TextArea;
 use EasyForms\Form;
 
+/**
+ * This form is used to demonstrate all form elements types
+ */
 class SignUpForm extends Form
 {
     /**
-     * @param CaptchaAdapter $captchaAdapter
+     *
      */
-    public function __construct(CaptchaAdapter $captchaAdapter)
+    public function __construct()
     {
         $aboutYou = new TextArea('about_you');
         $aboutYou->makeOptional();
 
-        $newsletters = new Select('newsletter', ['PRG' => 'Programming', 'TST' => 'Testing']);
-        $newsletters->enableMultipleSelection();
+        $languages = new Select('languages', [
+            'Compiled' => [
+                'J' => 'Java',
+                'S' => 'Scala',
+                'C' => 'C#',
+            ],
+            'Scripting' => [
+                'P' => 'PHP',
+                'JS' => 'JavaScript',
+                'R' => 'Ruby',
+            ],
+        ]);
+        $languages->enableMultipleSelection();
 
         $this
-            ->add(new Text('name'))
             ->add(new Text('username'))
             ->add(new Password('password'))
+            ->add(new Password('confirm_password'))
             ->add($aboutYou)
             ->add(new Radio('gender', ['male' => 'Male', 'female' => 'Female']))
             ->add(new File('avatar'))
-            ->add($newsletters)
-            ->add(new Captcha('captcha', $captchaAdapter));
+            ->add(new MultiCheckbox('topics', ['u' => 'Usability', 's' => 'Security', 't' => 'Testing']))
+            ->add($languages)
+            ->add(new Select('role', [
+                'b' => 'Backend developer',
+                'f' => 'Frontend developer',
+                's' => 'Full stack developer'
+            ]))
+            ->add(new Checkbox('terms', 'accept'));
     }
 }

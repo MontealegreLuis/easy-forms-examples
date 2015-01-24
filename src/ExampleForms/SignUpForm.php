@@ -26,6 +26,9 @@ class SignUpForm extends Form
         $aboutYou = new TextArea('about_you');
         $aboutYou->makeOptional();
 
+        $newsletters = new Select('newsletter', ['PRG' => 'Programming', 'TST' => 'Testing']);
+        $newsletters->enableMultipleSelection();
+
         $this
             ->add(new Text('name'))
             ->add(new Text('username'))
@@ -33,7 +36,7 @@ class SignUpForm extends Form
             ->add($aboutYou)
             ->add(new Radio('gender', ['male' => 'Male', 'female' => 'Female']))
             ->add(new File('avatar'))
-            ->add(new Select('newsletter', ['PRG' => 'Programming', 'TST' => 'Testing']))
+            ->add($newsletters)
             ->add(new Captcha('captcha', $captchaAdapter));
     }
 }

@@ -47,7 +47,7 @@ $environment = new Twig_Environment($loader, [
     'debug' => true,
     'strict_variables' => true,
 ]);
-$theme = new FormTheme($environment, ['layouts/form.html.twig']);
+$theme = new FormTheme($environment, 'layouts/form.html.twig');
 $environment->addExtension(new FormExtension(new FormRenderer($theme, new BlockOptions())));
 
 echo $environment->render('cart.html.twig', [

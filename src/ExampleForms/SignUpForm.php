@@ -51,13 +51,15 @@ class SignUpForm extends Form
             ->add($aboutYou)
             ->add(new Radio('gender', ['male' => 'Male', 'female' => 'Female']))
             ->add(new File('avatar'))
-            ->add(new MultiCheckbox('topics', ['u' => 'Usability', 's' => 'Security', 't' => 'Testing']))
             ->add($languages)
+            ->add(new MultiCheckbox('topics', ['u' => 'Usability', 's' => 'Security', 't' => 'Testing']))
             ->add(new Select('role', [
+                'c' => 'Choose one',
                 'b' => 'Backend developer',
                 'f' => 'Frontend developer',
-                's' => 'Full stack developer'
+                's' => 'Full stack developer',
             ]))
-            ->add(new Checkbox('terms', 'accept'));
+            ->add(new Checkbox('terms', 'accept'))
+        ;
     }
 }

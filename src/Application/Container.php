@@ -7,7 +7,9 @@
 namespace Application;
 
 use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
+use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
 use ExampleForms\AddProductForm;
+use ExampleForms\Filters\SignUpFilter;
 use ExampleForms\LoginForm;
 use ExampleForms\SignUpForm;
 use ExampleForms\TweetForm;
@@ -37,20 +39,24 @@ class Container
             ]);
         });
 
-        $app->container->singleton('tweetForm', function () use ($app) {
+        $app->container->singleton('tweetForm', function () {
             return new TweetForm();
         });
 
-        $app->container->singleton('addProductForm', function () use ($app) {
+        $app->container->singleton('addProductForm', function () {
             return new AddProductForm();
         });
 
-        $app->container->singleton('signUpForm', function () use ($app) {
+        $app->container->singleton('signUpForm', function () {
             return new SignUpForm();
         });
 
         $app->container->singleton('loginForm', function () use ($app) {
             return new LoginForm($app->tokenProvider);
+        });
+
+        $app->container->singleton('signUpValidator', function () {
+            return new InputFilterValidator(new SignUpFilter(realpath('uploads')));
         });
 
         $app->container->singleton('tokenProvider', function () use ($app) {

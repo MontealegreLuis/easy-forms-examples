@@ -57,5 +57,22 @@ class Router
                 'signUp' => $app->signUpForm->buildView(),
             ]);
         });
+
+        $app->map('/validation', function () use ($app) {
+
+            $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/optional.html.twig"), new BlockOptions());
+            $app->twig->addExtension(new FormExtension($renderer));
+
+            $signUpInformation = $app->request->isGet() ? [] : array_merge($app->request->post(), $_FILES);
+
+            $app->signUpForm->submit($signUpInformation);
+
+            $isValid = $app->signUpValidator->validate($app->signUpForm);
+
+            echo $app->twig->render('examples/validation.html.twig', [
+                'signUp' => $view = $app->signUpForm->buildView(),
+                'isValid' => $isValid,
+            ]);
+        })->via('GET', 'POST');
     }
 }

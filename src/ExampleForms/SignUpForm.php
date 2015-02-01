@@ -23,7 +23,18 @@ use EasyForms\Form;
 class SignUpForm extends Form
 {
     /**
+     * This form has the following elements
      *
+     * - username (text)
+     * - password (password)
+     * - confirm_password (password)
+     * - about_you (text area)
+     * - gender (radio)
+     * - avatar (file)
+     * - languages (multiple select)
+     * - topics (multiple checkbox)
+     * - role (select)
+     * - terms (checkbox)
      */
     public function __construct()
     {

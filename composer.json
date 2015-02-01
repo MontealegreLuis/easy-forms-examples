@@ -18,12 +18,13 @@
     },
     "require": {
         "comphppuebla/easy-forms": "1.0.*@dev",
+        "slim/slim": "~2.5",
         "symfony/security-csrf": "~2.6",
         "twig/twig": "~1.16",
         "zendframework/zend-captcha": "~2.3",
+        "zendframework/zend-eventmanager": "~2.3",
         "zendframework/zend-inputfilter": "~2.3",
         "zendframework/zend-session": "~2.3",
-        "zendframework/zend-eventmanager": "~2.3",
-        "slim/slim": "~2.5"
+        "zendframework/zendservice-recaptcha": "~2.0"
     }
 }

@@ -1,0 +1,11 @@
+{{ form_start(comment) }}
+
+{{ element_row(comment.message, {'label': 'Share your opinion', 'attr': {'id': 'message'}}) }}
+
+{{ element_row(comment.captcha, {'label': 'Type the words in the image below', 'attr': {'id': 'captcha'}}) }}
+
+<button type="submit" class="btn btn-default">
+    <span class="glyphicon glyphicon-user"></span> Comment
+</button>
+
+{{ form_end() }}

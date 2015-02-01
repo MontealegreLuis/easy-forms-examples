@@ -9,6 +9,7 @@ namespace Application;
 use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
 use ExampleForms\AddProductForm;
+use ExampleForms\Filters\CommentFilter;
 use ExampleForms\Filters\SignUpFilter;
 use ExampleForms\LoginForm;
 use ExampleForms\SignUpForm;
@@ -19,6 +20,10 @@ use Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator;
 use Symfony\Component\Security\Csrf\TokenStorage\NativeSessionTokenStorage;
 use Twig_Environment as Environment;
 use Twig_Loader_Filesystem as Loader;
+use Zend\Captcha\Image;
+use Zend\Captcha\ReCaptcha;
+use Zend\Http\Client;
+use ZendService\ReCaptcha\ReCaptcha as ReCaptchaService;
 
 class Container
 {
@@ -53,6 +58,35 @@ class Container
 
         $app->container->singleton('loginForm', function () use ($app) {
             return new LoginForm($app->tokenProvider);
+        });
+
+        $app->container->singleton('imageCaptcha', function () {
+            return new Image([
+                'font' => 'fonts/Monaco.ttf',
+                'imgDir' => realpath('public/images/captcha'),
+                'imgUrl' => '/images/captcha',
+            ]);
+        });
+
+        $app->container->singleton('reCaptcha', function () use ($app) {
+            return new ReCaptcha([
+                'service' => new ReCaptchaService(
+                    '6Ldawu0SAAAAAIteRKIEA8LaDmMcgrEtDESTEvMo',
+                    '6Ldawu0SAAAAAOMHpocI7rAUK1M4yJd5RzX4h2WH',
+                    null, // params
+                    null, // options
+                    null, // IP
+                    new Client(null /* URI */, ['adapter' => new Client\Adapter\Curl()])
+                )
+            ]);
+        });
+
+        $app->container->singleton('commentValidator', function () use ($app) {
+            return new InputFilterValidator($app->commentFilter);
+        });
+
+        $app->container->singleton('commentFilter', function () {
+            return new CommentFilter();
         });
 
         $app->container->singleton('signUpValidator', function () {

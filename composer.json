@@ -1,6 +1,6 @@
 {
-    "name": "montealegreluis/simple-form-examples",
-    "description": "Examples of usage for comphppuebla/simple-form package.",
+    "name": "montealegreluis/easy-forms-examples",
+    "description": "Examples of usage for comphppuebla/easy-forms package.",
     "license": "MIT",
     "authors": [
         {
@@ -26,5 +26,8 @@
         "zendframework/zend-inputfilter": "~2.3",
         "zendframework/zend-session": "~2.3",
         "zendframework/zendservice-recaptcha": "~2.0"
+    },
+    "require-dev": {
+        "phing/phing": "~2.9"
     }
 }

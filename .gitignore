@@ -1,2 +1,4 @@
-vendor/
+app/config.php
 bin/
+local.build.properties
+vendor/

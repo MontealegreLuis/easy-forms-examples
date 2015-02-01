@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="easyforms" description="Easy forms examples" default="setup">
+
+    <target description="Setup the application"
+        name="setup"
+        depends="app:config">
+    </target>
+
+    <target name="app:config" description="Build configuration file" depends="-local-properties">
+        <echo msg="Building configuration file..." />
+        <copy file="${project.basedir}/app/config.dist.php"
+              tofile="${project.basedir}/app/config.php"
+              overwrite="true">
+            <filterchain>
+                <replacetokens begintoken="##" endtoken="##">
+                    <token key="recaptcha.private_key" value="${recaptcha.private_key}" />
+                    <token key="recaptcha.public_key" value="${recaptcha.public_key}" />
+                </replacetokens>
+            </filterchain>
+        </copy>
+    </target>
+
+    <available file="${settings.file}" property="settings.file.exists" value="1" />
+    <if>
+        <equals arg1="${settings.file.exists}" arg2="1" />
+        <then>
+            <property file="${settings.file}" />
+        </then>
+        <else>
+            <property file="${project.basedir}/build.properties" />
+        </else>
+    </if>
+
+    <target name="-local-properties"
+        if="local.properties.exist"
+        depends="-local-properties-check"
+        description="Load custom properties if present"
+        hidden="true">
+        <echo message="Loading custom properties..." />
+        <property file="${project.basedir}/local.build.properties" override="true" />
+    </target>
+
+    <target name="-local-properties-check"
+        description="Checks if there are custom properties to load"
+        hidden="true">
+        <available file="${project.basedir}/local.build.properties" property="local.properties.exist" value="1" />
+    </target>
+
+</project>

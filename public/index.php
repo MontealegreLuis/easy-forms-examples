@@ -10,7 +10,7 @@ require 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
 
-$container = new \Application\Container();
+$container = new \Application\Container(require 'app/config.php');
 $container->configure($app);
 
 $router = new \Application\Router();

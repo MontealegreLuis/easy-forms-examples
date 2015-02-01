@@ -27,21 +27,26 @@ use ZendService\ReCaptcha\ReCaptcha as ReCaptchaService;
 
 class Container
 {
+    /** @var array */
+    protected $options;
+
+    /**
+     * @param array $options
+     */
+    public function __construct(array $options)
+    {
+        $this->options = $options;
+    }
+
+
     public function configure(Slim $app)
     {
         $app->container->singleton('loader', function () {
-            return new Loader([
-                'vendor/comphppuebla/easy-forms/src/EasyForms/Bridges/Twig',
-                'app/templates',
-            ]);
+            return new Loader($this->options['twig']['loader_paths']);
         });
 
         $app->container->singleton('twig', function () use ($app) {
-            return new Environment($app->loader, [
-                'cache' => 'var/cache/twig',
-                'debug' => true,
-                'strict_variables' => true,
-            ]);
+            return new Environment($app->loader, $this->options['twig']['options']);
         });
 
         $app->container->singleton('tweetForm', function () {
@@ -61,22 +66,18 @@ class Container
         });
 
         $app->container->singleton('imageCaptcha', function () {
-            return new Image([
-                'font' => 'fonts/Monaco.ttf',
-                'imgDir' => realpath('public/images/captcha'),
-                'imgUrl' => '/images/captcha',
-            ]);
+            return new Image($this->options['captcha']['image_options']);
         });
 
         $app->container->singleton('reCaptcha', function () use ($app) {
             return new ReCaptcha([
                 'service' => new ReCaptchaService(
-                    '6Ldawu0SAAAAAIteRKIEA8LaDmMcgrEtDESTEvMo',
-                    '6Ldawu0SAAAAAOMHpocI7rAUK1M4yJd5RzX4h2WH',
-                    null, // params
-                    null, // options
-                    null, // IP
-                    new Client(null /* URI */, ['adapter' => new Client\Adapter\Curl()])
+                    $this->options['captcha']['recaptcha_public_key'],
+                    $this->options['captcha']['recaptcha_private_key'],
+                    $params = null,
+                    $options = null,
+                    $ip = null,
+                    new Client($uri = null, ['adapter' => new Client\Adapter\Curl()])
                 )
             ]);
         });

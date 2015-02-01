@@ -109,6 +109,24 @@ class Router
             echo $app->twig->render('examples/captcha.html.twig', [
                 'comment' => $view = $commentForm->buildView(),
                 'isValid' => $isValid,
+                'type' => $type,
+            ]);
+        })->via('GET', 'POST');
+
+        $app->map('/csrf', function () use ($app) {
+
+            $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/required.html.twig"), new BlockOptions());
+            $app->twig->addExtension(new FormExtension($renderer));
+
+            $credentials = $app->request->isGet() ? [] : $app->request->post();
+
+            $app->loginForm->submit($credentials);
+
+            $isValid = $app->loginValidator->validate($app->loginForm);
+
+            echo $app->twig->render('examples/csrf-elements.html.twig', [
+                'login' => $view = $app->loginForm->buildView(),
+                'isValid' => $isValid,
             ]);
         })->via('GET', 'POST');
     }

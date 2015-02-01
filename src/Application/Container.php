@@ -10,6 +10,7 @@ use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
 use ExampleForms\AddProductForm;
 use ExampleForms\Filters\CommentFilter;
+use ExampleForms\Filters\LoginFilter;
 use ExampleForms\Filters\SignUpFilter;
 use ExampleForms\LoginForm;
 use ExampleForms\SignUpForm;
@@ -88,6 +89,10 @@ class Container
 
         $app->container->singleton('commentFilter', function () {
             return new CommentFilter();
+        });
+
+        $app->container->singleton('loginValidator', function () use ($app) {
+            return new InputFilterValidator(new LoginFilter($app->tokenProvider));
         });
 
         $app->container->singleton('signUpValidator', function () {

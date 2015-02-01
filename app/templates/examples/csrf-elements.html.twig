@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% form_theme ['layouts/captcha-bootstrap3.html.twig'] %}
+{% block title %}/ CRSF tokens examples{% endblock %}
 
 {% block content %}
 <div class="page-header">
@@ -8,19 +8,14 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">Login</div>
             <div class="panel-body">
+                {% if isValid %}
+                    <p class="lead bg-success text-center">Everything passed validation!</p>
+                {% endif %}
                 {% include 'forms/login.html.twig' %}
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">Sign up</div>
-            <div class="panel-body">
-                {% include 'forms/sign-up.html.twig' %}
             </div>
         </div>
     </div>

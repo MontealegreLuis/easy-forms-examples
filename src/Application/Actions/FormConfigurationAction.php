@@ -52,6 +52,10 @@ class FormConfigurationAction
     }
 
     /**
+     * Validate the form values and show it with the corresponding error messages
+     *
+     * The form is configured using the values retrieved by the product's catalog
+     *
      * @param Request $request
      */
     public function __invoke(Request $request)

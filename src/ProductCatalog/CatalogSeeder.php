@@ -27,7 +27,8 @@ class CatalogSeeder
     public function seed(Catalog $catalog)
     {
         foreach ($this->products as $product) {
-            $catalog->add(new Product($product['productId'], $product['unitPrice'], $product['name']));
+            $description = isset($product['description']) ? $product['description'] : null;
+            $catalog->add(new Product($product['productId'], $product['unitPrice'], $product['name'], $description));
         }
     }
 }

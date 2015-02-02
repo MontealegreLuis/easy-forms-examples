@@ -10,7 +10,7 @@ use Application\Actions\EditRecordAction;
 use Application\Actions\FormConfigurationAction;
 use Application\Actions\FormValidationAction;
 use Application\Actions\IndexAction;
-use Application\Actions\ShowCaptchasAction;
+use Application\Actions\ShowCaptchaAction;
 use Application\Actions\ShowCsrfTokensAction;
 use Application\Actions\ShowElementTypesAction;
 use Application\Actions\ShowLayoutAction;
@@ -57,12 +57,8 @@ class Container
      */
     public function configure(Slim $app)
     {
-        $this->registerTwig($app);
-        $this->registerForms($app);
-        $this->registerValidators($app);
+        $this->registerServices($app);
         $this->registerControllers($app);
-        $this->registerCsrfTokenProvider($app);
-        $this->registerFormsConfiguration($app);
     }
 
     /**
@@ -98,8 +94,8 @@ class Container
                 ), [$app->request]
             );
         }));
-        $app->container->set('showCaptchasAction', $app->container->protect(function () use ($app) {
-            call_user_func_array(new ShowCaptchasAction(
+        $app->container->set('showCaptchaAction', $app->container->protect(function () use ($app) {
+            call_user_func_array(new ShowCaptchaAction(
                 $app->container->get('twig'),
                 new Image($this->options['captcha']['image_options']),
                 new ReCaptcha([
@@ -144,7 +140,7 @@ class Container
     /**
      * @param Slim $app
      */
-    protected function registerForms(Slim $app)
+    protected function registerServices(Slim $app)
     {
         $app->container->singleton('productForm', function () {
             return new ProductForm();
@@ -155,52 +151,24 @@ class Container
         $app->container->singleton('productForm', function () use ($app) {
             return new ProductForm();
         });
-    }
-
-    /**
-     * @param Slim $app
-     */
-    protected function registerValidators(Slim $app)
-    {
         $app->container->singleton('addToCartFilter', function () {
             return new AddToCartFilter();
         });
         $app->container->singleton('commentFilter', function () {
             return new CommentFilter();
         });
-    }
-
-    /**
-     * @param Slim $app
-     */
-    protected function registerFormsConfiguration(Slim $app)
-    {
         $app->container->singleton('catalog', function () {
             $catalog = new Catalog();
-            $seeder = new CatalogSeeder(require $this->options['products']);
+            $seeder = new CatalogSeeder($this->options['products']);
             $seeder->seed($catalog);
 
             return $catalog;
         });
-    }
-
-    /**
-     * @param Slim $app
-     */
-    protected function registerCsrfTokenProvider(Slim $app)
-    {
         $app->container->singleton('tokenProvider', function () use ($app) {
             return new CsrfTokenProvider(
                 new CsrfTokenManager(new UriSafeTokenGenerator(), new NativeSessionTokenStorage())
             );
         });
-    }
-
-    /**
-     * @param Slim $app
-     */
-    protected function registerTwig(Slim $app)
-    {
         $app->container->singleton('loader', function () {
             return new Loader($this->options['twig']['loader_paths']);
         });

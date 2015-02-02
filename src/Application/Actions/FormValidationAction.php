@@ -35,6 +35,10 @@ class FormValidationAction
     }
 
     /**
+     * Validate the form values and show it with the corresponding error messages
+     *
+     * If a file is sent it si saved in the 'uploads' folder
+     *
      * @param Request $request
      */
     public function __invoke(Request $request)

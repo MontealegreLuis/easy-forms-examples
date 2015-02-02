@@ -35,6 +35,8 @@ class ShowLayoutAction
     }
 
     /**
+     * Select a different form and layout depending on the value of the 'layout' argument
+     *
      * @param string $layout
      */
     public function __invoke($layout)

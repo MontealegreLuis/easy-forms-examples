@@ -16,6 +16,13 @@ use EasyForms\Form;
 class LoginForm extends Form
 {
     /**
+     * Form with the following fields
+     *
+     * - username (a text element)
+     * - password (a password element)
+     * - remember_me (a checkbox element)
+     * - csrf_token (a hidden element which value is a CSRF token)
+     *
      * @param TokenProvider $csrfTokenProvider
      */
     public function __construct(TokenProvider $csrfTokenProvider)
@@ -24,6 +31,7 @@ class LoginForm extends Form
             ->add(new Text('username'))
             ->add(new Password('password'))
             ->add(new Checkbox('remember_me', 'remember_me'))
-            ->add(new Csrf('csrf_token', '_login_csrf_token', $csrfTokenProvider));
+            ->add(new Csrf('csrf_token', '_login_csrf_token', $csrfTokenProvider))
+        ;
     }
 }

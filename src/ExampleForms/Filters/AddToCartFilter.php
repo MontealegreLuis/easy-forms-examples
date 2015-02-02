@@ -38,7 +38,8 @@ class AddToCartFilter extends InputFilter
             ->getValidatorChain()
             ->attach(new InArray([
                 'haystack' => $configuration->getProductsIds(),
-            ]));
+            ]))
+        ;
     }
 
     /**
@@ -50,11 +51,13 @@ class AddToCartFilter extends InputFilter
 
         $product
             ->getValidatorChain()
-            ->attach(new NotEmpty());
+            ->attach(new NotEmpty())
+        ;
 
         $product
             ->getFilterChain()
-            ->attach(new Int());
+            ->attach(new Int())
+        ;
 
         return $product;
     }
@@ -68,11 +71,13 @@ class AddToCartFilter extends InputFilter
         $quantity
             ->getValidatorChain()
             ->attach(new NotEmpty())
-            ->attach(new Digits());
+            ->attach(new Digits())
+        ;
 
         $quantity
             ->getFilterChain()
-            ->attach(new Int());
+            ->attach(new Int())
+        ;
 
         return $quantity;
     }

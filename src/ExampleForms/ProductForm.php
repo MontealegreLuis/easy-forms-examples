@@ -54,7 +54,8 @@ class ProductForm extends Form
         $this->populate([
             'productId' => $product->productId,
             'unitPrice' => $product->unitPrice,
-            'name' => $product->name
+            'name' => $product->name,
+            'description' => $product->description,
         ]);
     }
 }

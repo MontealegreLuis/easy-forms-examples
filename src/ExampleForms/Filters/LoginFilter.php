@@ -48,11 +48,13 @@ class LoginFilter extends InputFilter
             ]))
             ->attach(new Regex([
                 'pattern' => '/^[a-z0-9_\.]*$/',
-            ]));
+            ]))
+        ;
 
         $username
             ->getFilterChain()
-            ->attach(new StringTrim());
+            ->attach(new StringTrim())
+        ;
 
         return $username;
     }
@@ -68,7 +70,8 @@ class LoginFilter extends InputFilter
             ->attach(new NotEmpty())
             ->attach(new StringLength([
                 'min' => 8,
-            ]));
+            ]))
+        ;
 
         return $password;
     }
@@ -88,7 +91,8 @@ class LoginFilter extends InputFilter
                 'tokenProvider' => $tokenProvider,
                 'tokenId' => '_login_csrf_token',
                 'updateToken' => true,
-            ]));
+            ]))
+        ;
 
         return $csrf;
     }

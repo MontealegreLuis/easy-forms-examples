@@ -58,11 +58,13 @@ class SignUpFilter extends InputFilter
             ]))
             ->attach(new Regex([
                 'pattern' => '/^[a-z0-9_\.]*$/',
-            ]));
+            ]))
+        ;
 
         $username
             ->getFilterChain()
-            ->attach(new StringTrim());
+            ->attach(new StringTrim())
+        ;
 
         return $username;
     }
@@ -78,7 +80,8 @@ class SignUpFilter extends InputFilter
             ->attach(new NotEmpty())
             ->attach(new StringLength([
                 'min' => 8,
-            ]));
+            ]))
+        ;
 
         return $password;
     }
@@ -95,7 +98,8 @@ class SignUpFilter extends InputFilter
             ->attach(new StringLength([
                 'min' => '8'
             ]))
-            ->attach(new Identical('password'));
+            ->attach(new Identical('password'))
+        ;
 
         return $confirmPassword;
     }
@@ -115,12 +119,14 @@ class SignUpFilter extends InputFilter
             ->getValidatorChain()
             ->attach(new StringLength([
                 'max' => '1000'
-            ]));
+            ]))
+        ;
 
         $description
             ->getFilterChain()
             ->attach(new StringTrim())
-            ->attach(new StripTags());
+            ->attach(new StripTags())
+        ;
 
         return $description;
     }
@@ -138,7 +144,8 @@ class SignUpFilter extends InputFilter
             ->getValidatorChain()
             ->attach(new InArray([
                 'haystack' => ['male', 'female'],
-            ]));
+            ]))
+        ;
 
         return $gender;
     }
@@ -158,7 +165,8 @@ class SignUpFilter extends InputFilter
             ->attach(new Extension(['jpg', 'png']))
             ->attach(new IsImage())
             ->attach(new MimeType(['image']))
-            ->attach(new Size(['max' => '20Mb']));
+            ->attach(new Size(['max' => '20Mb']))
+        ;
 
         $avatar
             ->getFilterChain()
@@ -167,7 +175,8 @@ class SignUpFilter extends InputFilter
                 'use_upload_name' => true,
                 'use_upload_extension' => true,
                 'overwrite' => true,
-            ]));
+            ]))
+        ;
 
         return $avatar;
     }
@@ -185,7 +194,8 @@ class SignUpFilter extends InputFilter
             ->getValidatorChain()
             ->attach(new Explode([
                 'validator' => new InArray(['haystack' => ['J', 'S', 'C', 'P', 'JS', 'R', ]])
-            ]));
+            ]))
+        ;
 
         return $languages;
     }
@@ -203,7 +213,8 @@ class SignUpFilter extends InputFilter
             ->getValidatorChain()
             ->attach(new Explode([
                 'validator' => new InArray(['haystack' => ['u', 's', 't']]),
-            ]));
+            ]))
+        ;
 
         return $topics;
     }
@@ -221,7 +232,8 @@ class SignUpFilter extends InputFilter
             ->getValidatorChain()
             ->attach(new InArray([
                 'haystack' => ['b', 'f', 's'],
-            ]));
+            ]))
+        ;
 
         return $role;
     }
@@ -239,7 +251,8 @@ class SignUpFilter extends InputFilter
             ->getValidatorChain()
             ->attach(new InArray([
                 'haystack' => ['accept'],
-            ]));
+            ]))
+        ;
 
         return $terms;
     }

@@ -3,8 +3,6 @@
  * PHP version 5.5
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
- *
- * @copyright  Mandrágora Web-Based Systems 2015 (http://www.mandragora-web-systems.com)
  */
 namespace ExampleForms\Filters;
 
@@ -14,12 +12,13 @@ use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
+use Zend\Validator\NotEmpty;
 use Zend\Validator\StringLength;
 
 class CommentFilter extends InputFilter
 {
     /**
-     * Adds validation for the message
+     * Add validation to the message text element
      */
     public function __construct()
     {
@@ -34,7 +33,6 @@ class CommentFilter extends InputFilter
     protected function buildMessageInput()
     {
         $message = new Input('message');
-        $message->setContinueIfEmpty(true);
 
         $message
             ->getFilterChain()
@@ -44,9 +42,11 @@ class CommentFilter extends InputFilter
 
         $message
             ->getValidatorChain()
+            ->attach(new NotEmpty())
             ->attach(new StringLength([
                 'max' => 2000,
-            ]));
+            ]))
+        ;
 
         return $message;
     }
@@ -71,14 +71,14 @@ class CommentFilter extends InputFilter
      */
     public function addReCaptchaValidation(ReCaptcha $validator)
     {
-        $reCapctha = $this->buildCaptchaInput();
+        $reCaptcha = $this->buildCaptchaInput();
 
-        $reCapctha
+        $reCaptcha
             ->getValidatorChain()
             ->attach($validator)
         ;
 
-        $this->add($reCapctha);
+        $this->add($reCaptcha);
     }
 
     /**

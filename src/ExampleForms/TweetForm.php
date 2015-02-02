@@ -15,11 +15,12 @@ use EasyForms\Form;
 class TweetForm extends Form
 {
     /**
-     * This form only contains a text area named 'tweet'
+     * This form only contains a text area element named 'tweet'
      */
     public function __construct()
     {
         $this
-            ->add(new TextArea('tweet'));
+            ->add(new TextArea('tweet'))
+        ;
     }
 }

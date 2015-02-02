@@ -23,7 +23,8 @@ class AddToCartForm extends Form
     {
         $this
             ->add(new Select('product'))
-            ->add(new Text('quantity'));
+            ->add(new Text('quantity'))
+        ;
     }
 
     /**

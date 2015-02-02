@@ -18,7 +18,7 @@ use Twig_Environment as Twig;
 use Zend\Captcha\Image;
 use Zend\Captcha\ReCaptcha;
 
-class ShowCaptchasAction
+class ShowCaptchaAction
 {
     use ProvidesFormRenderer;
 
@@ -56,6 +56,8 @@ class ShowCaptchasAction
     }
 
     /**
+     * Depending on the 'captchaType' argument, either show an image captcha or a ReCaptcha
+     *
      * @param Request $request
      * @param string $captchaType
      */

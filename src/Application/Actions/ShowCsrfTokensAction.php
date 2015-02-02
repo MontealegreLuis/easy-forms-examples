@@ -35,6 +35,8 @@ class ShowCsrfTokensAction
     }
 
     /**
+     * Show and validate a form with a hidden element which value is a CSRF token
+     *
      * @param Request $request
      */
     public function __invoke(Request $request)

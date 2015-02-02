@@ -25,5 +25,14 @@ return [
             'strict_variables' => true,
         ]
     ],
-    'products' => 'app/products.php',
+    'products' => [
+        [
+            'productId' => 1,
+            'unitPrice' => 100,
+            'name' => 'Super Mario Bros',
+            'description' => 'It is a 1985 platform video game internally developed by Nintendo and published by Nintendo as a pseudo-sequel to the 1983 game Mario Bros.',
+        ],
+        ['productId' => 2, 'unitPrice' => 120, 'name' => 'Call of Duty'],
+        ['productId' => 3, 'unitPrice' => 110, 'name' => 'Mortal Kombat II'],
+    ],
 ];

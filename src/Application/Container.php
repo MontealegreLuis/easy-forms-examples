@@ -6,6 +6,7 @@
  */
 namespace Application;
 
+use Application\Actions\FormConfigurationAction;
 use Application\Actions\FormValidationAction;
 use Application\Actions\ShowCaptchasAction;
 use Application\Actions\ShowCsrfTokensAction;
@@ -89,6 +90,15 @@ class Container
         $app->showCsrfTokensAction = $app->container->protect(function () use ($app) {
             call_user_func_array(new ShowCsrfTokensAction(
                 $app->twig, $app->loginForm, $app->loginValidator
+            ), [$app->request]);
+        });
+        $app->formConfigurationAction = $app->container->protect(function () use ($app) {
+            call_user_func_array(new FormConfigurationAction(
+                $app->twig,
+                $app->addToCartForm,
+                $app->addToCartFilter,
+                $app->addToCartConfiguration,
+                $app->addToCartValidator
             ), [$app->request]);
         });
     }

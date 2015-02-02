@@ -37,24 +37,7 @@ class Router
 
         $app->map('/csrf', $app->showCsrfTokensAction)->via('GET', 'POST');
 
-        $app->map('/database', function () use ($app) {
-            $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/required.html.twig"), new BlockOptions());
-            $app->twig->addExtension(new FormExtension($renderer));
-
-            $app->addToCartForm->configure($app->addToCartConfiguration);
-            $app->addToCartFilter->configure($app->addToCartConfiguration);
-
-            $orderItemInformation = $app->request->isGet() ? [] : $app->request->post();
-
-            $app->addToCartForm->submit($orderItemInformation);
-
-            $isValid = $app->addToCartValidator->validate($app->addToCartForm);
-
-            echo $app->twig->render('examples/database.html.twig', [
-                'cart' => $view = $app->addToCartForm->buildView(),
-                'isValid' => $isValid,
-            ]);
-        })->via('GET', 'POST');
+        $app->map('/database', $app->formConfigurationAction)->via('GET', 'POST');
 
         $app->map('/edit-information', function () use ($app) {
             $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/required.html.twig"), new BlockOptions());

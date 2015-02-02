@@ -6,7 +6,7 @@
  */
 namespace ProductCatalog;
 
-class ProductState
+class ProductInformation
 {
     /** @var integer */
     public $productId;

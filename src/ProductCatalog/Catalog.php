@@ -30,7 +30,7 @@ class Catalog
     }
 
     /**
-     * @return ProductState[]
+     * @return ProductInformation[]
      */
     public function all()
     {
@@ -38,8 +38,9 @@ class Catalog
 
         /** @var Product $product */
         foreach ($this->products as $product) {
-            $products[] = $product->state();
+            $products[] = $product->information();
         }
+
         return $products;
     }
 }

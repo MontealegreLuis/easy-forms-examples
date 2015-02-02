@@ -25,4 +25,5 @@ return [
             'strict_variables' => true,
         ]
     ],
+    'products' => 'app/products.php',
 ];

@@ -10,6 +10,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Shopping cart</div>
                 <div class="panel-body">
+                    {% if isValid %}
+                        <p class="lead bg-success text-center">Everything passed validation!</p>
+                    {% endif %}
                     {% include 'forms/cart.html.twig' %}
                 </div>
             </div>

@@ -9,12 +9,17 @@ namespace Application;
 use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
 use ExampleForms\AddProductForm;
+use ExampleForms\AddToCartForm;
+use ExampleForms\Configuration\AddToCartConfiguration;
+use ExampleForms\Filters\AddToCartFilter;
 use ExampleForms\Filters\CommentFilter;
 use ExampleForms\Filters\LoginFilter;
 use ExampleForms\Filters\SignUpFilter;
 use ExampleForms\LoginForm;
 use ExampleForms\SignUpForm;
 use ExampleForms\TweetForm;
+use ProductCatalog\Catalog;
+use ProductCatalog\CatalogSeeder;
 use Slim\Slim;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
 use Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator;
@@ -66,6 +71,22 @@ class Container
             return new LoginForm($app->tokenProvider);
         });
 
+        $app->container->singleton('addToCartForm', function() {
+            return new AddToCartForm();
+        });
+
+        $app->container->singleton('addToCartConfiguration', function() use ($app) {
+            return new AddToCartConfiguration($app->catalog);
+        });
+
+        $app->container->singleton('catalog', function() {
+            $catalog = new Catalog();
+            $seeder = new CatalogSeeder(require $this->options['products']);
+            $seeder->seed($catalog);
+
+            return $catalog;
+        });
+
         $app->container->singleton('imageCaptcha', function () {
             return new Image($this->options['captcha']['image_options']);
         });
@@ -87,16 +108,24 @@ class Container
             return new InputFilterValidator($app->commentFilter);
         });
 
-        $app->container->singleton('commentFilter', function () {
-            return new CommentFilter();
-        });
-
         $app->container->singleton('loginValidator', function () use ($app) {
             return new InputFilterValidator(new LoginFilter($app->tokenProvider));
         });
 
         $app->container->singleton('signUpValidator', function () {
             return new InputFilterValidator(new SignUpFilter(realpath('uploads')));
+        });
+
+        $app->container->singleton('addToCartValidator', function () use ($app) {
+            return new InputFilterValidator($app->addToCartFilter);
+        });
+
+        $app->container->singleton('commentFilter', function () {
+            return new CommentFilter();
+        });
+
+        $app->container->singleton('addToCartFilter', function () {
+            return new AddToCartFilter();
         });
 
         $app->container->singleton('tokenProvider', function () use ($app) {

@@ -30,11 +30,11 @@ class Product
     }
 
     /**
-     * @return ProductState
+     * @return ProductInformation
      */
-    public function state()
+    public function information()
     {
-        $state = new ProductState();
+        $state = new ProductInformation();
         $state->productId = $this->productId;
         $state->unitPrice = $this->unitPrice;
         $state->name = $this->name;

@@ -7,7 +7,7 @@
 namespace ExampleForms\Configuration;
 
 use ProductCatalog\Catalog;
-use ProductCatalog\ProductState;
+use ProductCatalog\ProductInformation;
 
 class AddToCartConfiguration
 {
@@ -31,7 +31,7 @@ class AddToCartConfiguration
     public function getProductOptions()
     {
         $this->productOptions = [];
-        array_map(function (ProductState $product) use (&$options) {
+        array_map(function (ProductInformation $product) use (&$options) {
             $this->productOptions[$product->productId] = "{$product->name}, \${$product->unitPrice}";
         }, $this->catalog->all());
 

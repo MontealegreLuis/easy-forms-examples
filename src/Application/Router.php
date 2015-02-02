@@ -33,40 +33,7 @@ class Router
 
         $app->map('/validation', $app->showFormValidation)->via('GET', 'POST');
 
-        $app->map('/captcha/:type', function ($type) use ($app) {
-
-            if (!in_array($type, ['re-captcha', 'image'])) {
-                $app->notFound();
-            }
-
-            $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/required.html.twig"), new BlockOptions());
-            $app->twig->addExtension(new FormExtension($renderer));
-
-            if ($type === 'image') {
-                $commentForm = new CommentForm(new ImageCaptchaAdapter($app->imageCaptcha));
-            } else {
-                $commentForm = new CommentForm(new ReCaptchaAdapter($app->reCaptcha));
-            }
-
-            $isValid = false;
-            if ($app->request->isPost()) {
-                if ($type === 'image') {
-                    $app->commentFilter->addImageValidation($app->imageCaptcha);
-                } else {
-                    $app->commentFilter->addReCaptchaValidation($app->reCaptcha);
-                }
-
-                $commentForm->submit($app->request->post());
-
-                $isValid = $app->commentValidator->validate($commentForm);
-            }
-
-            echo $app->twig->render('examples/captcha.html.twig', [
-                'comment' => $view = $commentForm->buildView(),
-                'isValid' => $isValid,
-                'type' => $type,
-            ]);
-        })->via('GET', 'POST');
+        $app->map('/captcha/:type', $app->showCaptchasAction)->via('GET', 'POST');
 
         $app->map('/csrf', function () use ($app) {
 

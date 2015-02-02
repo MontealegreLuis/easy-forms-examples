@@ -7,6 +7,7 @@
 namespace Application;
 
 use Application\Actions\FormValidationAction;
+use Application\Actions\ShowCaptchasAction;
 use Application\Actions\ShowElementTypesAction;
 use Application\Actions\ShowLayoutAction;
 use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
@@ -78,6 +79,11 @@ class Container
             call_user_func_array(
                 new FormValidationAction($app->twig, $app->signUpForm, $app->signUpValidator), [$app->request]
             );
+        });
+        $app->showCaptchasAction = $app->container->protect(function () use ($app) {
+            call_user_func_array(new ShowCaptchasAction(
+                $app->twig, $app->imageCaptcha, $app->reCaptcha, $app->commentFilter, $app->commentValidator
+            ), [$app->request] + func_get_args());
         });
     }
 

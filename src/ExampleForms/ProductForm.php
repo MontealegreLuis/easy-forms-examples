@@ -6,14 +6,16 @@
  */
 namespace ExampleForms;
 
+use EasyForms\Elements\Hidden;
 use EasyForms\Elements\Text;
 use EasyForms\Elements\TextArea;
 use EasyForms\Form;
+use ProductCatalog\ProductInformation;
 
 /**
  * This form is used to demonstrate the combination of a custom layout with an inline layout
  */
-class AddProductForm extends Form
+class ProductForm extends Form
 {
     /**
      * The elements of this form are as follows:
@@ -30,6 +32,29 @@ class AddProductForm extends Form
         $this
             ->add(new Text('name'))
             ->add($description)
-            ->add(new Text('price'));
+            ->add(new Text('unitPrice'))
+        ;
+    }
+
+    /**
+     * We need the hidden element when we edit an existing product's information
+     */
+    public function addProductId()
+    {
+        $this->add(new Hidden('productId'));
+    }
+
+    /**
+     * Pass the current product's information to the form so the user can edit it
+     *
+     * @param ProductInformation $product
+     */
+    public function populateFrom(ProductInformation $product)
+    {
+        $this->populate([
+            'productId' => $product->productId,
+            'unitPrice' => $product->unitPrice,
+            'name' => $product->name
+        ]);
     }
 }

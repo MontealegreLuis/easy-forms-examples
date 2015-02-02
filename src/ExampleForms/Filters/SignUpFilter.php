@@ -144,7 +144,6 @@ class SignUpFilter extends InputFilter
     }
 
     /**
-     * @param string $pathToMagicFile
      * @param string $uploadsDirectory
      * @return \Zend\InputFilter\Input
      */
@@ -164,10 +163,10 @@ class SignUpFilter extends InputFilter
         $avatar
             ->getFilterChain()
             ->attach(new RenameUpload([
-                'target'               => $uploadsDirectory,
-                'use_upload_name'      => true,
+                'target' => $uploadsDirectory,
+                'use_upload_name' => true,
                 'use_upload_extension' => true,
-                'overwrite'            => true,
+                'overwrite' => true,
             ]));
 
         return $avatar;

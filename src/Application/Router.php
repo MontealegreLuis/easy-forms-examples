@@ -17,6 +17,9 @@ use Slim\Slim;
 
 class Router
 {
+    /**
+     * @param Slim $app
+     */
     public function register(Slim $app)
     {
         $app->get('/', function () use ($app) {
@@ -130,7 +133,7 @@ class Router
             ]);
         })->via('GET', 'POST');
 
-        $app->map('/database', function() use ($app) {
+        $app->map('/database', function () use ($app) {
             $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/required.html.twig"), new BlockOptions());
             $app->twig->addExtension(new FormExtension($renderer));
 
@@ -146,6 +149,18 @@ class Router
             echo $app->twig->render('examples/database.html.twig', [
                 'cart' => $view = $app->addToCartForm->buildView(),
                 'isValid' => $isValid,
+            ]);
+        })->via('GET', 'POST');
+
+        $app->map('/edit-information', function () use ($app) {
+            $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/required.html.twig"), new BlockOptions());
+            $app->twig->addExtension(new FormExtension($renderer));
+
+            $app->productForm->addProductId();
+            $app->productForm->populateFrom($product = $app->catalog->productOf($id = 1));
+
+            echo $app->twig->render('examples/edit-information.html.twig', [
+                'product' => $view = $app->productForm->buildView(),
             ]);
         })->via('GET', 'POST');
     }

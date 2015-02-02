@@ -17,16 +17,21 @@ class Product
     /** @var string */
     protected $name;
 
+    /** @var string */
+    protected $description;
+
     /**
      * @param integer $productId
      * @param float $unitPrice
      * @param string $name
+     * @param string $description (optional)
      */
-    public function __construct($productId, $unitPrice, $name)
+    public function __construct($productId, $unitPrice, $name, $description = null)
     {
         $this->productId = $productId;
         $this->unitPrice = $unitPrice;
         $this->name = $name;
+        $this->description = $description;
     }
 
     /**
@@ -34,11 +39,12 @@ class Product
      */
     public function information()
     {
-        $state = new ProductInformation();
-        $state->productId = $this->productId;
-        $state->unitPrice = $this->unitPrice;
-        $state->name = $this->name;
+        $information = new ProductInformation();
+        $information->productId = $this->productId;
+        $information->unitPrice = $this->unitPrice;
+        $information->name = $this->name;
+        $information->description = $this->description;
 
-        return $state;
+        return $information;
     }
 }

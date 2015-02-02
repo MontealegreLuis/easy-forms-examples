@@ -30,6 +30,21 @@ class Catalog
     }
 
     /**
+     * @param integer $productId
+     * @return ProductInformation
+     */
+    public function productOf($productId)
+    {
+        /** @var Product $product */
+        foreach ($this->products as $product) {
+            $information = $product->information();
+            if ($information->productId === $productId) {
+                return $information;
+            }
+        }
+    }
+
+    /**
      * @return ProductInformation[]
      */
     public function all()

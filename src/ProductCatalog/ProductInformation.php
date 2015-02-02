@@ -16,4 +16,7 @@ class ProductInformation
 
     /** @var string */
     public $name;
+
+    /** @var string */
+    public $description;
 }

@@ -8,7 +8,7 @@ namespace Application;
 
 use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
-use ExampleForms\AddProductForm;
+use ExampleForms\ProductForm;
 use ExampleForms\AddToCartForm;
 use ExampleForms\Configuration\AddToCartConfiguration;
 use ExampleForms\Filters\AddToCartFilter;
@@ -60,7 +60,7 @@ class Container
         });
 
         $app->container->singleton('addProductForm', function () {
-            return new AddProductForm();
+            return new ProductForm();
         });
 
         $app->container->singleton('signUpForm', function () {
@@ -71,15 +71,19 @@ class Container
             return new LoginForm($app->tokenProvider);
         });
 
-        $app->container->singleton('addToCartForm', function() {
+        $app->container->singleton('productForm', function () use ($app) {
+            return new ProductForm();
+        });
+
+        $app->container->singleton('addToCartForm', function () {
             return new AddToCartForm();
         });
 
-        $app->container->singleton('addToCartConfiguration', function() use ($app) {
+        $app->container->singleton('addToCartConfiguration', function () use ($app) {
             return new AddToCartConfiguration($app->catalog);
         });
 
-        $app->container->singleton('catalog', function() {
+        $app->container->singleton('catalog', function () {
             $catalog = new Catalog();
             $seeder = new CatalogSeeder(require $this->options['products']);
             $seeder->seed($catalog);

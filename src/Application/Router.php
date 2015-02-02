@@ -27,22 +27,7 @@ class Router
             echo $app->twig->render('index.html.twig');
         });
 
-        $app->get('/theme/:layoutName', function ($layoutName) use ($app) {
-
-            if (!in_array($layoutName, ['default', 'bootstrap3', 'required', 'optional'])) {
-                $app->notFound();
-            }
-
-            $renderer = new FormRenderer(
-                new FormTheme($app->twig, "layouts/$layoutName.html.twig"), new BlockOptions()
-            );
-            $app->twig->addExtension(new FormExtension($renderer));
-
-            echo $app->twig->render('examples/layout.html.twig', [
-                'twitter' => $app->tweetForm->buildView(),
-                'layoutName' => $layoutName,
-            ]);
-        });
+        $app->get('/theme/:layoutName', $app->showLayoutAction);
 
         $app->get('/inline-theme', function () use ($app) {
 

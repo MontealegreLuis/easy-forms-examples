@@ -9,6 +9,7 @@ namespace Application;
 use Application\Actions\EditRecordAction;
 use Application\Actions\FormConfigurationAction;
 use Application\Actions\FormValidationAction;
+use Application\Actions\IndexAction;
 use Application\Actions\ShowCaptchasAction;
 use Application\Actions\ShowCsrfTokensAction;
 use Application\Actions\ShowElementTypesAction;
@@ -70,6 +71,9 @@ class Container
      */
     protected function registerControllers(Slim $app)
     {
+        $app->indexAction = $app->container->protect(function () use ($app) {
+            call_user_func(new IndexAction($app->twig));
+        });
         $app->showLayoutAction = $app->container->protect(function () use ($app) {
             call_user_func_array(
                 new ShowLayoutAction($app->twig, $app->tweetForm, $app->productForm), func_get_args()

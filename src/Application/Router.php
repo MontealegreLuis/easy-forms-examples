@@ -15,13 +15,13 @@ class Router
      */
     public function register(Slim $app)
     {
-        $app->get('/', $app->indexAction);
-        $app->get('/theme/:layoutName', $app->showLayoutAction);
-        $app->get('/sign-up', $app->showElementTypes);
-        $app->map('/validation', $app->showFormValidation)->via('GET', 'POST');
-        $app->map('/captcha/:type', $app->showCaptchasAction)->via('GET', 'POST');
-        $app->map('/csrf', $app->showCsrfTokensAction)->via('GET', 'POST');
-        $app->map('/database', $app->formConfigurationAction)->via('GET', 'POST');
-        $app->map('/edit-information', $app->editRecordAction)->via('GET', 'POST');
+        $app->get('/', $app->container->get('indexAction'));
+        $app->get('/theme/:layoutName', $app->container->get('showLayoutAction'));
+        $app->get('/sign-up', $app->container->get('showElementTypes'));
+        $app->map('/validation', $app->container->get('showFormValidation'))->via('GET', 'POST');
+        $app->map('/captcha/:type', $app->container->get('showCaptchasAction'))->via('GET', 'POST');
+        $app->map('/csrf', $app->container->get('showCsrfTokensAction'))->via('GET', 'POST');
+        $app->map('/database', $app->container->get('formConfigurationAction'))->via('GET', 'POST');
+        $app->map('/edit-information', $app->container->get('editRecordAction'))->via('GET', 'POST');
     }
 }

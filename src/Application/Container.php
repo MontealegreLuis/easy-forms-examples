@@ -61,7 +61,6 @@ class Container
         $this->registerForms($app);
         $this->registerValidators($app);
         $this->registerControllers($app);
-        $this->registerCaptchas($app);
         $this->registerCsrfTokenProvider($app);
         $this->registerFormsConfiguration($app);
     }
@@ -71,48 +70,75 @@ class Container
      */
     protected function registerControllers(Slim $app)
     {
-        $app->indexAction = $app->container->protect(function () use ($app) {
-            call_user_func(new IndexAction($app->twig));
-        });
-        $app->showLayoutAction = $app->container->protect(function () use ($app) {
+        $app->container->set('indexAction', $app->container->protect(function () use ($app) {
+            call_user_func(new IndexAction($app->container->get('twig')));
+        }));
+        $app->container->set('showLayoutAction', $app->container->protect(function () use ($app) {
             call_user_func_array(
-                new ShowLayoutAction($app->twig, $app->tweetForm, $app->productForm), func_get_args()
+                new ShowLayoutAction(
+                    $app->container->get('twig'),
+                    new TweetForm(),
+                    $app->container->get('productForm')
+                ),
+                func_get_args()
             );
-        });
-        $app->showElementTypes = $app->container->protect(function () use ($app) {
-            call_user_func(new ShowElementTypesAction($app->twig, $app->signUpForm));
-        });
-        $app->showFormValidation = $app->container->protect(function () use ($app) {
-            call_user_func_array(
-                new FormValidationAction($app->twig, $app->signUpForm, $app->signUpValidator), [$app->request]
-            );
-        });
-        $app->showCaptchasAction = $app->container->protect(function () use ($app) {
-            call_user_func_array(new ShowCaptchasAction(
-                $app->twig, $app->imageCaptcha, $app->reCaptcha, $app->commentFilter, $app->commentValidator
-            ), array_merge([$app->request], func_get_args()));
-        });
-        $app->showCsrfTokensAction = $app->container->protect(function () use ($app) {
-            call_user_func_array(new ShowCsrfTokensAction(
-                $app->twig, $app->loginForm, $app->loginValidator
-            ), [$app->request]);
-        });
-        $app->formConfigurationAction = $app->container->protect(function () use ($app) {
-            call_user_func_array(new FormConfigurationAction(
-                $app->twig,
-                $app->addToCartForm,
-                $app->addToCartFilter,
-                $app->addToCartConfiguration,
-                $app->addToCartValidator
-            ), [$app->request]);
-        });
-        $app->editRecordAction = $app->container->protect(function () use ($app) {
-            call_user_func(new EditRecordAction(
-                $app->twig,
-                $app->productForm,
-                $app->catalog
+        }));
+        $app->container->set('showElementTypes', $app->container->protect(function () use ($app) {
+            call_user_func(new ShowElementTypesAction(
+                $app->container->get('twig'),
+                $app->container->get('signUpForm')
             ));
-        });
+        }));
+        $app->container->set('showFormValidation', $app->container->protect(function () use ($app) {
+            call_user_func_array(
+                new FormValidationAction(
+                    $app->container->get('twig'),
+                    $app->container->get('signUpForm'),
+                    new InputFilterValidator(new SignUpFilter(realpath('uploads')))
+                ), [$app->request]
+            );
+        }));
+        $app->container->set('showCaptchasAction', $app->container->protect(function () use ($app) {
+            call_user_func_array(new ShowCaptchasAction(
+                $app->container->get('twig'),
+                new Image($this->options['captcha']['image_options']),
+                new ReCaptcha([
+                    'service' => new ReCaptchaService(
+                        $this->options['captcha']['recaptcha_public_key'],
+                        $this->options['captcha']['recaptcha_private_key'],
+                        $params = null,
+                        $options = null,
+                        $ip = null,
+                        new Client($uri = null, ['adapter' => new Client\Adapter\Curl()])
+                    )
+                ]),
+                $app->container->get('commentFilter'),
+                new InputFilterValidator($app->container->get('commentFilter'))
+            ), array_merge([$app->request], func_get_args()));
+        }));
+        $app->container->set('showCsrfTokensAction', $app->container->protect(function () use ($app) {
+            call_user_func_array(new ShowCsrfTokensAction(
+                $app->container->get('twig'),
+                new LoginForm($app->container->get('tokenProvider')),
+                new InputFilterValidator(new LoginFilter($app->container->get('tokenProvider')))
+            ), [$app->request]);
+        }));
+        $app->container->set('formConfigurationAction', $app->container->protect(function () use ($app) {
+            call_user_func_array(new FormConfigurationAction(
+                $app->container->get('twig'),
+                new AddToCartForm(),
+                $app->container->get('addToCartFilter'),
+                new AddToCartConfiguration($app->container->get('catalog')),
+                new InputFilterValidator($app->container->get('addToCartFilter'))
+            ), [$app->request]);
+        }));
+        $app->container->set('editRecordAction', $app->container->protect(function () use ($app) {
+            call_user_func(new EditRecordAction(
+                $app->container->get('twig'),
+                $app->container->get('productForm'),
+                $app->container->get('catalog')
+            ));
+        }));
     }
 
     /**
@@ -120,23 +146,14 @@ class Container
      */
     protected function registerForms(Slim $app)
     {
-        $app->container->singleton('tweetForm', function () {
-            return new TweetForm();
-        });
         $app->container->singleton('productForm', function () {
             return new ProductForm();
         });
         $app->container->singleton('signUpForm', function () {
             return new SignUpForm();
         });
-        $app->container->singleton('loginForm', function () use ($app) {
-            return new LoginForm($app->tokenProvider);
-        });
         $app->container->singleton('productForm', function () use ($app) {
             return new ProductForm();
-        });
-        $app->container->singleton('addToCartForm', function () {
-            return new AddToCartForm();
         });
     }
 
@@ -145,24 +162,11 @@ class Container
      */
     protected function registerValidators(Slim $app)
     {
-        $app->container->singleton('commentValidator', function () use ($app) {
-            return new InputFilterValidator($app->commentFilter);
-        });
-        $app->container->singleton('loginValidator', function () use ($app) {
-            return new InputFilterValidator(new LoginFilter($app->tokenProvider));
-        });
-        $app->container->singleton('signUpValidator', function () {
-            return new InputFilterValidator(new SignUpFilter(realpath('uploads')));
-        });
-        $app->container->singleton('addToCartValidator', function () use ($app) {
-            return new InputFilterValidator($app->addToCartFilter);
-        });
-
-        $app->container->singleton('commentFilter', function () {
-            return new CommentFilter();
-        });
         $app->container->singleton('addToCartFilter', function () {
             return new AddToCartFilter();
+        });
+        $app->container->singleton('commentFilter', function () {
+            return new CommentFilter();
         });
     }
 
@@ -171,37 +175,12 @@ class Container
      */
     protected function registerFormsConfiguration(Slim $app)
     {
-        $app->container->singleton('addToCartConfiguration', function () use ($app) {
-            return new AddToCartConfiguration($app->catalog);
-        });
         $app->container->singleton('catalog', function () {
             $catalog = new Catalog();
             $seeder = new CatalogSeeder(require $this->options['products']);
             $seeder->seed($catalog);
 
             return $catalog;
-        });
-    }
-
-    /**
-     * @param Slim $app
-     */
-    protected function registerCaptchas(Slim $app)
-    {
-        $app->container->singleton('imageCaptcha', function () {
-            return new Image($this->options['captcha']['image_options']);
-        });
-        $app->container->singleton('reCaptcha', function () use ($app) {
-            return new ReCaptcha([
-                'service' => new ReCaptchaService(
-                    $this->options['captcha']['recaptcha_public_key'],
-                    $this->options['captcha']['recaptcha_private_key'],
-                    $params = null,
-                    $options = null,
-                    $ip = null,
-                    new Client($uri = null, ['adapter' => new Client\Adapter\Curl()])
-                )
-            ]);
         });
     }
 
@@ -226,7 +205,7 @@ class Container
             return new Loader($this->options['twig']['loader_paths']);
         });
         $app->container->singleton('twig', function () use ($app) {
-            return new Environment($app->loader, $this->options['twig']['options']);
+            return new Environment($app->container->get('loader'), $this->options['twig']['options']);
         });
     }
 }

@@ -6,6 +6,7 @@
  */
 namespace Application;
 
+use Application\Actions\EditRecordAction;
 use Application\Actions\FormConfigurationAction;
 use Application\Actions\FormValidationAction;
 use Application\Actions\ShowCaptchasAction;
@@ -100,6 +101,13 @@ class Container
                 $app->addToCartConfiguration,
                 $app->addToCartValidator
             ), [$app->request]);
+        });
+        $app->editRecordAction = $app->container->protect(function () use ($app) {
+            call_user_func(new EditRecordAction(
+                $app->twig,
+                $app->productForm,
+                $app->catalog
+            ));
         });
     }
 

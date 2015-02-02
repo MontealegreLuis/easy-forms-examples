@@ -65,7 +65,9 @@ class Container
     protected function registerControllers(Slim $app)
     {
         $app->showLayoutAction = $app->container->protect(function () use ($app) {
-            call_user_func_array(new ShowLayoutAction($app->twig, $app->tweetForm), func_get_args());
+            call_user_func_array(
+                new ShowLayoutAction($app->twig, $app->tweetForm, $app->productForm), func_get_args()
+            );
         });
     }
 
@@ -77,7 +79,7 @@ class Container
         $app->container->singleton('tweetForm', function () {
             return new TweetForm();
         });
-        $app->container->singleton('addProductForm', function () {
+        $app->container->singleton('productForm', function () {
             return new ProductForm();
         });
         $app->container->singleton('signUpForm', function () {

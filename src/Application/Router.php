@@ -29,16 +29,6 @@ class Router
 
         $app->get('/theme/:layoutName', $app->showLayoutAction);
 
-        $app->get('/inline-theme', function () use ($app) {
-
-            $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/required.html.twig"), new BlockOptions());
-            $app->twig->addExtension(new FormExtension($renderer));
-
-            echo $app->twig->render('examples/inline-layout.html.twig', [
-                'product' => $app->addProductForm->buildView(),
-            ]);
-        });
-
         $app->get('/sign-up', function () use ($app) {
 
             $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/optional.html.twig"), new BlockOptions());

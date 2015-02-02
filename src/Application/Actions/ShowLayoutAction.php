@@ -6,15 +6,12 @@
  */
 namespace Application\Actions;
 
-use EasyForms\Bridges\Twig\BlockOptions;
-use EasyForms\Bridges\Twig\FormExtension;
-use EasyForms\Bridges\Twig\FormRenderer;
-use EasyForms\Bridges\Twig\FormTheme;
+use ExampleForms\ProductForm;
 use ExampleForms\TweetForm;
 use Slim\Slim;
 use Twig_Environment as Twig;
 
-class ShowLayoutAction
+class ShowLayoutAction extends FormThemeAction
 {
     /** @var Twig */
     protected $view;
@@ -22,14 +19,19 @@ class ShowLayoutAction
     /** @var TweetForm */
     protected $tweetForm;
 
+    /** @var ProductForm */
+    protected $productForm;
+
     /**
      * @param Twig $view
      * @param TweetForm $tweetForm
+     * @param ProductForm $productForm
      */
-    public function __construct(Twig $view, TweetForm $tweetForm)
+    public function __construct(Twig $view, TweetForm $tweetForm, ProductForm $productForm)
     {
         $this->view = $view;
         $this->tweetForm = $tweetForm;
+        $this->productForm = $productForm;
     }
 
     /**
@@ -37,16 +39,30 @@ class ShowLayoutAction
      */
     public function __invoke($layout)
     {
-        if (!in_array($layout, ['default', 'bootstrap3', 'required', 'optional'])) {
+        if (!in_array($layout, ['default', 'bootstrap3', 'required', 'optional', 'inline'])) {
             Slim::getInstance()->notFound();
         }
 
-        $renderer = new FormRenderer(new FormTheme($this->view, "layouts/$layout.html.twig"), new BlockOptions());
-        $this->view->addExtension(new FormExtension($renderer));
+        $template = 'examples/layout.html.twig';
+        $formLayout = $layout;
+        $vars = [
+            'layoutName' => $formLayout,
+            'formTemplate' => 'tweet',
+            'form' => $this->tweetForm->buildView()
+        ];
 
-        echo $this->view->render('examples/layout.html.twig', [
-            'twitter' => $this->tweetForm->buildView(),
-            'layoutName' => $layout,
-        ]);
+        if ($layout === 'inline') {
+            $template = 'examples/inline-layout.html.twig';
+            $formLayout = 'optional'; // Switch to the 'optional' form layout because both examples use the same form
+        }
+
+        if ($formLayout === 'optional') {
+            $vars['form'] = $this->productForm->buildView();
+            $vars['formTemplate'] = 'product';
+        }
+
+        $this->configureFormRenderer($this->view, $formLayout);
+
+        echo $this->view->render($template, $vars);
     }
 }

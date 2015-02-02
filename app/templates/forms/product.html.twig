@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+
+{{ element_row(form.name, {'label': 'Name', 'attr': {'id': 'name'}}) }}
+{{ element_row(form.description, {'label': 'Description', 'attr': {'id': 'description'}}) }}
+{# Override the element's default rendering block with the block option #}
+{{ element_row(form.unitPrice, {'label': 'Unit price', 'attr': {'id': 'price'}, 'options': options|default([])}) }}
+
+<button type="submit" class="btn btn-default">
+    <span class="glyphicon glyphicon-th-list"></span> Add to catalog
+</button>
+
+{{ form_end() }}

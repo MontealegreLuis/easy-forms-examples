@@ -1,9 +1,9 @@
-{{ form_start(twitter) }}
+{{ form_start(form) }}
 
-{{ element_row(twitter.tweet, {'label': 'Publish a new tweet', 'attr': {'id': 'tweet'}}) }}
+{{ element_row(form.tweet, {'label': 'Publish a new tweet', 'attr': {'id': 'tweet'}}) }}
 
 <button type="submit" class="btn btn-default">
-    <span class="glyphicon glyphicon-share-alt"></span> Tweet
+    <span class="glyphicon glyphicon-share"></span> Tweet
 </button>
 
 {{ form_end() }}

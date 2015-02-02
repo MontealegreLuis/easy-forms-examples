@@ -21,12 +21,13 @@
     <div class="row">
         <div class="col-md-12">
 
-            <p>This example shows the rendering of a form using the inline layout.</p>
+            <p>This example shows the rendering of a form using the optional + inline layout.</p>
 
             <div class="panel panel-default">
                 <div class="panel-heading">Add product to catalog</div>
                 <div class="panel-body">
-                    {% include 'forms/add-product.html.twig' %} {# The add product to catalog form #}
+                    {% set options = {'block': 'money'} %}
+                    {% include 'forms/product.html.twig' %} {# The add product to catalog form #}
                 </div>
             </div>
 

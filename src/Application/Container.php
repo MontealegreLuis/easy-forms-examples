@@ -6,6 +6,7 @@
  */
 namespace Application;
 
+use Application\Actions\ShowElementTypesAction;
 use Application\Actions\ShowLayoutAction;
 use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
@@ -68,6 +69,9 @@ class Container
             call_user_func_array(
                 new ShowLayoutAction($app->twig, $app->tweetForm, $app->productForm), func_get_args()
             );
+        });
+        $app->showElementTypes = $app->container->protect(function () use ($app) {
+            call_user_func(new ShowElementTypesAction($app->twig, $app->signUpForm));
         });
     }
 

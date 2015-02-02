@@ -6,15 +6,15 @@
  */
 namespace Application\Actions;
 
+use Application\ProvidesFormRenderer;
 use ExampleForms\ProductForm;
 use ExampleForms\TweetForm;
 use Slim\Slim;
 use Twig_Environment as Twig;
 
-class ShowLayoutAction extends FormThemeAction
+class ShowLayoutAction
 {
-    /** @var Twig */
-    protected $view;
+    use ProvidesFormRenderer;
 
     /** @var TweetForm */
     protected $tweetForm;
@@ -61,7 +61,7 @@ class ShowLayoutAction extends FormThemeAction
             $vars['formTemplate'] = 'product';
         }
 
-        $this->configureFormRenderer($this->view, $formLayout);
+        $this->configureFormRenderer($formLayout);
 
         echo $this->view->render($template, $vars);
     }

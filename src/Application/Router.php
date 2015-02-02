@@ -29,15 +29,7 @@ class Router
 
         $app->get('/theme/:layoutName', $app->showLayoutAction);
 
-        $app->get('/sign-up', function () use ($app) {
-
-            $renderer = new FormRenderer(new FormTheme($app->twig, "layouts/optional.html.twig"), new BlockOptions());
-            $app->twig->addExtension(new FormExtension($renderer));
-
-            echo $app->twig->render('examples/form-elements.html.twig', [
-                'signUp' => $app->signUpForm->buildView(),
-            ]);
-        });
+        $app->get('/sign-up', $app->showElementTypes);
 
         $app->map('/validation', function () use ($app) {
 

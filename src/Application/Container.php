@@ -6,6 +6,7 @@
  */
 namespace Application;
 
+use Application\Actions\FormValidationAction;
 use Application\Actions\ShowElementTypesAction;
 use Application\Actions\ShowLayoutAction;
 use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
@@ -72,6 +73,11 @@ class Container
         });
         $app->showElementTypes = $app->container->protect(function () use ($app) {
             call_user_func(new ShowElementTypesAction($app->twig, $app->signUpForm));
+        });
+        $app->showFormValidation = $app->container->protect(function () use ($app) {
+            call_user_func_array(
+                new FormValidationAction($app->twig, $app->signUpForm, $app->signUpValidator), [$app->request]
+            );
         });
     }
 

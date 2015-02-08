@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "17ffc8251ec496015fb7e179de57b3bd",
+    "hash": "c2803e0efe219179ff8b069860ba9f23",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -61,12 +61,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ComPHPPuebla/easy-forms.git",
-                "reference": "c688f18158c0a2dba50cf542d15ae36ab05a9bba"
+                "reference": "1e2b524e6b38fb1897c34e0846be44a3311f10ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ComPHPPuebla/easy-forms/zipball/c688f18158c0a2dba50cf542d15ae36ab05a9bba",
-                "reference": "c688f18158c0a2dba50cf542d15ae36ab05a9bba",
+                "url": "https://api.github.com/repos/ComPHPPuebla/easy-forms/zipball/1e2b524e6b38fb1897c34e0846be44a3311f10ab",
+                "reference": "1e2b524e6b38fb1897c34e0846be44a3311f10ab",
                 "shasum": ""
             },
             "require": {
@@ -107,7 +107,7 @@
             "keywords": [
                 "Forms"
             ],
-            "time": "2015-01-31 00:59:42"
+            "time": "2015-02-08 00:44:47"
         },
         {
             "name": "slim/slim",
@@ -157,17 +157,17 @@
         },
         {
             "name": "symfony/security-core",
-            "version": "v2.6.3",
+            "version": "v2.6.4",
             "target-dir": "Symfony/Component/Security/Core",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-core.git",
-                "reference": "db8c6964f9d69496b9ef21788c4afc4306113242"
+                "reference": "4603bcc66e20e23f018c67f7f9f3f8146a100c11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-core/zipball/db8c6964f9d69496b9ef21788c4afc4306113242",
-                "reference": "db8c6964f9d69496b9ef21788c4afc4306113242",
+                "url": "https://api.github.com/repos/symfony/security-core/zipball/4603bcc66e20e23f018c67f7f9f3f8146a100c11",
+                "reference": "4603bcc66e20e23f018c67f7f9f3f8146a100c11",
                 "shasum": ""
             },
             "require": {
@@ -216,11 +216,11 @@
             ],
             "description": "Symfony Security Component - Core Library",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 20:59:13"
+            "time": "2015-01-25 04:39:26"
         },
         {
             "name": "symfony/security-csrf",
-            "version": "v2.6.3",
+            "version": "v2.6.4",
             "target-dir": "Symfony/Component/Security/Csrf",
             "source": {
                 "type": "git",
@@ -1163,6 +1163,8 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.5"
+    },
     "platform-dev": []
 }

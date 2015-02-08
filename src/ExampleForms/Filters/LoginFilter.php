@@ -28,9 +28,11 @@ class LoginFilter extends InputFilter
      */
     public function __construct(TokenProvider $tokenProvider)
     {
-        $this->add($this->buildUsernameInput());
-        $this->add($this->buildPasswordInput());
-        $this->add($this->buildCsrfInput($tokenProvider));
+        $this
+            ->add($this->buildUsernameInput())
+            ->add($this->buildPasswordInput())
+            ->add($this->buildCsrfInput($tokenProvider))
+        ;
     }
 
     /**

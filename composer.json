@@ -17,6 +17,7 @@
         "bin-dir": "bin/"
     },
     "require": {
+        "php": ">=5.5",
         "comphppuebla/easy-forms": "1.0.*@dev",
         "slim/slim": "~2.5",
         "symfony/security-csrf": "~2.6",

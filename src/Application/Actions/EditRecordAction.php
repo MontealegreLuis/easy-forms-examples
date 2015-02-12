@@ -44,7 +44,7 @@ class EditRecordAction
         $this->productForm->populateFrom($product = $this->catalog->productOf($id = 1));
 
         echo $this->view->render('examples/edit-information.html.twig', [
-            'product' => $this->productForm->buildView(),
+            'form' => $this->productForm->buildView(),
         ]);
     }
 }

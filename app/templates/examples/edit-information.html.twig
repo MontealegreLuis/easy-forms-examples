@@ -24,7 +24,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Edit a product's information</div>
                 <div class="panel-body">
-                    {% include 'forms/edit-product.html.twig' %}
+                    {% set options = {'block': 'money'} %}
+                    {% include 'forms/product.html.twig' %}
                 </div>
             </div>
         </div>

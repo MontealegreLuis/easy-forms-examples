@@ -1,9 +1,10 @@
 # Form processing examples
 
-This repository contains usage examples of [comphpuebla/easy-forms][1] package.
+This repository contains usage examples of [comphpuebla/easy-forms][1] package. You
+can find the documentation [here][2].
 
 To use this application you will need to have installed PHP (version 5.5 or higher),
-and Composer. If you already have them installed, execute:
+and [Composer][3]. If you already have them installed, execute:
 
 ```bash
 $ make setup
@@ -18,3 +19,5 @@ $ make run
 Then simply navigate to `http://localhost:8000/`.
 
 [1]: https://github.com/ComPHPPuebla/easy-forms
+[2]: http://comphppuebla.github.io/easy-forms/
+[3]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx

@@ -4,11 +4,11 @@
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-namespace ExampleForms;
+namespace Example\Forms;
 
 use EasyForms\Form;
-use ExampleForms\Configuration\ProductPricingConfiguration;
-use ExampleForms\Elements\Money;
+use Example\Configuration\ProductPricingConfiguration;
+use Example\Elements\Money;
 
 class ProductPricingForm extends Form
 {

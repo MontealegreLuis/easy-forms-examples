@@ -7,7 +7,7 @@
 namespace Application\Actions;
 
 use Application\ProvidesFormRenderer;
-use ExampleForms\ProductForm;
+use Example\Forms\ProductForm;
 use ProductCatalog\Catalog;
 use Twig_Environment as Twig;
 

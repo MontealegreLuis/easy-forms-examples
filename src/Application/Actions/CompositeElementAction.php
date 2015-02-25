@@ -8,7 +8,7 @@ namespace Application\Actions;
 
 use Application\ProvidesFormRenderer;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
-use ExampleForms\ProductPricingForm;
+use Example\Forms\ProductPricingForm;
 use Slim\Http\Request;
 use Twig_Environment as Twig;
 

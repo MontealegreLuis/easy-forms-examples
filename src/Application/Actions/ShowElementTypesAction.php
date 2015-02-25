@@ -7,7 +7,7 @@
 namespace Application\Actions;
 
 use Application\ProvidesFormRenderer;
-use ExampleForms\SignUpForm;
+use Example\Forms\SignUpForm;
 use Twig_Environment as Twig;
 
 class ShowElementTypesAction

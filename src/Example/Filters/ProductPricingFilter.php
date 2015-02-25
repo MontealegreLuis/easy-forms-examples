@@ -4,9 +4,9 @@
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-namespace ExampleForms\Filters;
+namespace Example\Filters;
 
-use ExampleForms\Configuration\ProductPricingConfiguration;
+use Example\Configuration\ProductPricingConfiguration;
 use Zend\InputFilter\InputFilter;
 
 class ProductPricingFilter extends InputFilter

@@ -8,9 +8,9 @@ namespace Application\Actions;
 
 use Application\ProvidesFormRenderer;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
-use ExampleForms\AddToCartForm;
-use ExampleForms\Configuration\AddToCartConfiguration;
-use ExampleForms\Filters\AddToCartFilter;
+use Example\Configuration\AddToCartConfiguration;
+use Example\Filters\AddToCartFilter;
+use Example\Forms\AddToCartForm;
 use Slim\Http\Request;
 use Twig_Environment as Twig;
 

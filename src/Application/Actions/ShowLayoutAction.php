@@ -7,8 +7,8 @@
 namespace Application\Actions;
 
 use Application\ProvidesFormRenderer;
-use ExampleForms\ProductForm;
-use ExampleForms\TweetForm;
+use Example\Forms\ProductForm;
+use Example\Forms\TweetForm;
 use Slim\Slim;
 use Twig_Environment as Twig;
 

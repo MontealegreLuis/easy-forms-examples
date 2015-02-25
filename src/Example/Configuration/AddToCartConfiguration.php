@@ -4,7 +4,7 @@
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-namespace ExampleForms\Configuration;
+namespace Example\Configuration;
 
 use ProductCatalog\Catalog;
 use ProductCatalog\ProductInformation;

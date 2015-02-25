@@ -4,13 +4,13 @@
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-namespace ExampleForms\Elements;
+namespace Example\Elements;
 
 use EasyForms\Elements\Element;
 use EasyForms\Elements\Select;
 use EasyForms\Elements\Text;
 use EasyForms\View\ElementView;
-use ExampleForms\Views\MoneyView;
+use Example\Views\MoneyView;
 
 class Money extends Element
 {

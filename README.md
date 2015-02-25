@@ -16,8 +16,9 @@ After setting things up
 $ make run
 ```
 
-Then simply navigate to `http://localhost:8000/`.
+Then simply navigate to [http://localhost:8000][4].
 
 [1]: https://github.com/ComPHPPuebla/easy-forms
 [2]: http://comphppuebla.github.io/easy-forms/
 [3]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx
+[4]: http://localhost:8000

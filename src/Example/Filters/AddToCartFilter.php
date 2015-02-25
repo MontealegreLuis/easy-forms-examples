@@ -4,9 +4,9 @@
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-namespace ExampleForms\Filters;
+namespace Example\Filters;
 
-use ExampleForms\Configuration\AddToCartConfiguration;
+use Example\Configuration\AddToCartConfiguration;
 use Zend\Filter\Int;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;

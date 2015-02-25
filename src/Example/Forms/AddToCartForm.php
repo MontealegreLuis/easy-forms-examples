@@ -4,9 +4,9 @@
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-namespace ExampleForms;
+namespace Example\Forms;
 
-use ExampleForms\Configuration\AddToCartConfiguration;
+use Example\Configuration\AddToCartConfiguration;
 use EasyForms\Elements\Select;
 use EasyForms\Elements\Text;
 use EasyForms\Form;

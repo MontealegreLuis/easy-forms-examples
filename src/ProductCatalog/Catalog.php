@@ -58,4 +58,14 @@ class Catalog
 
         return $products;
     }
+
+    /**
+     * Return the ISO codes that can be assigned to a product's price
+     *
+     * @return array
+     */
+    public function validCurrencies()
+    {
+        return ['MXN', 'USD'];
+    }
 }

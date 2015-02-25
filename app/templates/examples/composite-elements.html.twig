@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}/ Composite element{% endblock %}
+
+{# Use this template as an inline layout #}
+{% form_theme [_self] %}
+
+{# Custom block #}
+{%- block money -%}
+    <div class="form-inline">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">$</div>
+                {# Render the money amount as a text element #}
+                {%- set options = options|merge({'block': 'input'}) -%}
+                {%- set attr = attr|merge(element.amount.attributes) -%}
+                {{- element(element.amount, attr, options) -}}
+            </div>
+            {# Render the money currency as a select element #}
+            {%- set options = options|merge({'block': 'select'}) -%}
+            {%- set attr = attr|merge(element.currency.attributes) -%}
+            {{- element(element.currency, attr, options) -}}
+        </div>
+    </div>
+{%- endblock money -%}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Welcome!</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="lead">This example shows the rendering of a form using a composite element.</p>
+            <div class="panel panel-default">
+                <div class="panel-heading">Update product pricing</div>
+                <div class="panel-body">
+                    {% if isValid %}
+                        <p class="lead bg-success text-center">Everything passed validation!</p>
+                    {% endif %}
+
+                    {% set options = {'block': 'money'} %}
+                    {% include 'forms/product-pricing.html.twig' %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

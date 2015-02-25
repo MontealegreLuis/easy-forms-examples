@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+
+{{ element_row(form.cost_price, {'label': 'Cost price', 'attr': {'id': 'cost_price'}}) }}
+{{ element_row(form.sale_price, {'label': 'Sale price', 'attr': {'id': 'sale_price'}}) }}
+
+{{ form_rest(form) }}
+
+<button type="submit" class="btn btn-default">
+    <span class="glyphicon glyphicon-usd"></span> Update pricing
+</button>
+
+{{ form_end() }}

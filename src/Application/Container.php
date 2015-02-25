@@ -6,6 +6,7 @@
  */
 namespace Application;
 
+use Application\Actions\CompositeElementAction;
 use Application\Actions\EditRecordAction;
 use Application\Actions\FormConfigurationAction;
 use Application\Actions\FormValidationAction;
@@ -14,8 +15,10 @@ use Application\Actions\ShowCaptchaAction;
 use Application\Actions\ShowCsrfTokensAction;
 use Application\Actions\ShowElementTypesAction;
 use Application\Actions\ShowLayoutAction;
-use EasyForms\Bridges\SymfonyCsrf\CsrfTokenProvider;
+use EasyForms\Bridges\Symfony\Security\CsrfTokenProvider;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
+use ExampleForms\Configuration\ProductPricingConfiguration;
+use ExampleForms\Filters\ProductPricingFilter;
 use ExampleForms\ProductForm;
 use ExampleForms\AddToCartForm;
 use ExampleForms\Configuration\AddToCartConfiguration;
@@ -24,6 +27,7 @@ use ExampleForms\Filters\CommentFilter;
 use ExampleForms\Filters\LoginFilter;
 use ExampleForms\Filters\SignUpFilter;
 use ExampleForms\LoginForm;
+use ExampleForms\ProductPricingForm;
 use ExampleForms\SignUpForm;
 use ExampleForms\TweetForm;
 use ProductCatalog\Catalog;
@@ -135,6 +139,13 @@ class Container
                 $app->container->get('catalog')
             ));
         }));
+        $app->container->set('compositeElementAction', $app->container->protect(function () use ($app) {
+            call_user_func_array(new CompositeElementAction(
+                $app->container->get('twig'),
+                $app->container->get('pricingForm'),
+                new InputFilterValidator($app->container->get('pricingFilter'))
+            ), [$app->request]);
+        }));
     }
 
     /**
@@ -174,6 +185,21 @@ class Container
         });
         $app->container->singleton('twig', function () use ($app) {
             return new Environment($app->container->get('loader'), $this->options['twig']['options']);
+        });
+        $app->container->singleton('pricingConfiguration', function () use ($app) {
+            return new ProductPricingConfiguration($app->container->get('catalog'));
+        });
+        $app->container->singleton('pricingForm', function () use ($app) {
+            $form = new ProductPricingForm();
+            $form->configure($app->container->get('pricingConfiguration'));
+
+            return $form;
+        });
+        $app->container->singleton('pricingFilter', function () use ($app) {
+            $filter = new ProductPricingFilter();
+            $filter->configure($app->container->get('pricingConfiguration'));
+
+            return $filter;
         });
     }
 }

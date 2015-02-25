@@ -23,5 +23,6 @@ class Router
         $app->map('/csrf', $app->container->get('showCsrfTokensAction'))->via('GET', 'POST');
         $app->map('/database', $app->container->get('formConfigurationAction'))->via('GET', 'POST');
         $app->map('/edit-information', $app->container->get('editRecordAction'))->via('GET', 'POST');
+        $app->map('/composite-element', $app->container->get('compositeElementAction'))->via('GET', 'POST');
     }
 }

@@ -61,12 +61,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ComPHPPuebla/easy-forms.git",
-                "reference": "1eb650d11b3a97808261070528fc105285925039"
+                "reference": "871c230c2b2ba30de1d0253c01d52ba846a0c97b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ComPHPPuebla/easy-forms/zipball/1eb650d11b3a97808261070528fc105285925039",
-                "reference": "1eb650d11b3a97808261070528fc105285925039",
+                "url": "https://api.github.com/repos/ComPHPPuebla/easy-forms/zipball/871c230c2b2ba30de1d0253c01d52ba846a0c97b",
+                "reference": "871c230c2b2ba30de1d0253c01d52ba846a0c97b",
                 "shasum": ""
             },
             "require": {
@@ -76,12 +76,26 @@
             "require-dev": {
                 "phpspec/phpspec": "~2.1",
                 "phpunit/phpunit": "~4.4",
+                "symfony/console": "~2.6",
+                "symfony/filesystem": "~2.6",
                 "symfony/security-csrf": "~2.6",
                 "twig/twig": "~1.16",
                 "zendframework/zend-captcha": "~2.3",
                 "zendframework/zend-inputfilter": "~2.3",
                 "zendframework/zendservice-recaptcha": "~2.0"
             },
+            "suggest": {
+                "symfony/console": "To build your forms interactively through the console",
+                "symfony/filesystem": "To build your forms interactively through the console",
+                "symfony/security-csrf": "To protect forms against CSRF atacks",
+                "twig/twig": "To provide form rendering",
+                "zendframework/zend-captcha": "To use CAPTCHA images in forms",
+                "zendframework/zend-inputfilter": "For filtering and validation",
+                "zendframework/zendservice-recaptcha": "To use ReCAPTCHA elements in forms"
+            },
+            "bin": [
+                "bin/forms"
+            ],
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -107,7 +121,7 @@
             "keywords": [
                 "Forms"
             ],
-            "time": "2015-02-12 02:02:23"
+            "time": "2015-02-25 00:14:09"
         },
         {
             "name": "slim/slim",
@@ -1068,16 +1082,16 @@
     "packages-dev": [
         {
             "name": "phing/phing",
-            "version": "2.10.0",
+            "version": "2.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phingofficial/phing.git",
-                "reference": "4927448a7bda2e1408d5fcbf7f725dc5bdcaf76d"
+                "reference": "f6c25373cbce5e042dddd9b951a3d5638bb78f67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/4927448a7bda2e1408d5fcbf7f725dc5bdcaf76d",
-                "reference": "4927448a7bda2e1408d5fcbf7f725dc5bdcaf76d",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/f6c25373cbce5e042dddd9b951a3d5638bb78f67",
+                "reference": "f6c25373cbce5e042dddd9b951a3d5638bb78f67",
                 "shasum": ""
             },
             "require": {
@@ -1092,9 +1106,9 @@
                 "pear-pear.php.net/pear_packagefilemanager": "1.7.x",
                 "pear-pear.php.net/pear_packagefilemanager2": "1.0.x",
                 "pear-pear.php.net/xml_serializer": "0.20.x",
-                "pear/pear_exception": "@dev",
+                "pear/pear_exception": "~1.0",
                 "pear/versioncontrol_git": "@dev",
-                "pear/versioncontrol_svn": "@dev",
+                "pear/versioncontrol_svn": "~0.5",
                 "phpdocumentor/phpdocumentor": "2.x",
                 "phploc/phploc": "2.x",
                 "phpmd/phpmd": "~2.2",
@@ -1121,7 +1135,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.9.x-dev"
+                    "dev-master": "2.10.x-dev"
                 }
             },
             "autoload": {
@@ -1154,7 +1168,7 @@
                 "task",
                 "tool"
             ],
-            "time": "2015-02-09 20:05:38"
+            "time": "2015-02-19 15:49:46"
         }
     ],
     "aliases": [],

@@ -6,6 +6,9 @@
  */
 namespace ProductCatalog;
 
+use Money\Currency;
+use Money\Money;
+
 class CatalogSeeder
 {
     /** @var array */
@@ -29,6 +32,15 @@ class CatalogSeeder
         foreach ($this->products as $product) {
             $description = isset($product['description']) ? $product['description'] : null;
             $catalog->add(new Product($product['productId'], $product['unitPrice'], $product['name'], $description));
+
+            if (isset($product['price'])) {
+                $price = $product['price'];
+                $catalog->addPrice(new ProductPricing(
+                    $product['productId'],
+                    new Money($price['cost_price']['amount'], new Currency($price['cost_price']['currency'])),
+                    new Money($price['sale_price']['amount'], new Currency($price['sale_price']['currency']))
+                ));
+            }
         }
     }
 }

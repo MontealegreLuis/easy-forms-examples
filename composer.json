@@ -26,7 +26,8 @@
         "zendframework/zend-eventmanager": "~2.3",
         "zendframework/zend-inputfilter": "~2.3",
         "zendframework/zend-session": "~2.3",
-        "zendframework/zendservice-recaptcha": "~2.0"
+        "zendframework/zendservice-recaptcha": "~2.0",
+        "mathiasverraes/money": "~1.2"
     },
     "require-dev": {
         "phing/phing": "~2.9"

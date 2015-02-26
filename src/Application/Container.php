@@ -143,7 +143,8 @@ class Container
             call_user_func_array(new CompositeElementAction(
                 $app->container->get('twig'),
                 $app->container->get('pricingForm'),
-                new InputFilterValidator($app->container->get('pricingFilter'))
+                new InputFilterValidator($app->container->get('pricingFilter')),
+                $app->container->get('catalog')
             ), [$app->request]);
         }));
     }

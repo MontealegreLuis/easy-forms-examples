@@ -9,6 +9,9 @@ namespace Application\Actions;
 use Application\ProvidesFormRenderer;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
 use Example\Forms\ProductPricingForm;
+use Money\Currency;
+use Money\Money;
+use ProductCatalog\Catalog;
 use Slim\Http\Request;
 use Twig_Environment as Twig;
 
@@ -22,16 +25,21 @@ class CompositeElementAction
     /** @var InputFilterValidator */
     protected $validator;
 
+    /** @var Catalog */
+    protected $catalog;
+
     /**
      * @param Twig $view
      * @param ProductPricingForm $form
      * @param InputFilterValidator $validator
+     * @param Catalog $catalog
      */
-    public function __construct(Twig $view, ProductPricingForm $form, InputFilterValidator $validator)
+    public function __construct(Twig $view, ProductPricingForm $form, InputFilterValidator $validator, Catalog $catalog)
     {
         $this->view = $view;
         $this->form = $form;
         $this->validator = $validator;
+        $this->catalog = $catalog;
     }
 
     /**
@@ -43,10 +51,25 @@ class CompositeElementAction
     {
         $this->configureFormRenderer('required');
 
-        $this->form->submit($pricingInformation = $request->isGet() ? [] : $request->post());
+        $isValid = false;
+        $pricing = $this->catalog->pricingFor($productId = 1);
+
+        if ($request->isPost()) {
+            $this->form->submit($request->post());
+            if ($isValid = $this->validator->validate($this->form)) {
+                $information = $this->form->values();
+                $pricing->update(
+                    new Money((int) $information['cost_price']['amount'], new Currency($information['cost_price']['currency'])),
+                    new Money((int) $information['sale_price']['amount'], new Currency($information['sale_price']['currency']))
+                );
+                $this->catalog->updatePrice($pricing);
+            }
+        }
+
+        $this->form->populateFrom($pricing->information());
 
         echo $this->view->render('examples/composite-elements.html.twig', [
-            'isValid' => $this->validator->validate($this->form),
+            'isValid' => $isValid,
             'form' => $this->form->buildView(),
         ]);
     }

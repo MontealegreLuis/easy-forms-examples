@@ -31,6 +31,10 @@ return [
             'unitPrice' => 100,
             'name' => 'Super Mario Bros',
             'description' => 'It is a 1985 platform video game internally developed by Nintendo and published by Nintendo as a pseudo-sequel to the 1983 game Mario Bros.',
+            'price' => [
+                'cost_price' => ['amount' => 20000, 'currency' => 'MXN'],
+                'sale_price' => ['amount' => 1000, 'currency' => 'USD'],
+            ]
         ],
         ['productId' => 2, 'unitPrice' => 120, 'name' => 'Call of Duty'],
         ['productId' => 3, 'unitPrice' => 110, 'name' => 'Mortal Kombat II'],

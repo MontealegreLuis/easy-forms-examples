@@ -13,12 +13,16 @@ class Catalog
     /** @var SplObjectStorage */
     protected $products;
 
+    /** @var SplObjectStorage */
+    protected $prices;
+
     /**
      * Initialize an empty list of products
      */
     public function __construct()
     {
         $this->products = new SplObjectStorage();
+        $this->prices = new SplObjectStorage();
     }
 
     /**
@@ -27,6 +31,22 @@ class Catalog
     public function add(Product $product)
     {
         $this->products->attach($product);
+    }
+
+    /**
+     * @param ProductPricing $price
+     */
+    public function addPrice(ProductPricing $price)
+    {
+        $this->prices[$price] = $price;
+    }
+
+    /**
+     * @param ProductPricing $price
+     */
+    public function updatePrice(ProductPricing $price)
+    {
+        $this->prices[$price] = $price;
     }
 
     /**
@@ -40,6 +60,21 @@ class Catalog
             $information = $product->information();
             if ($information->productId === $productId) {
                 return $information;
+            }
+        }
+    }
+
+    /**
+     * @param $productId
+     * @return ProductPricing
+     */
+    public function pricingFor($productId)
+    {
+        /** @var ProductPricing $price */
+        foreach ($this->prices as $price) {
+            $information = $price->information();
+            if ($information->productId === $productId) {
+                return $price;
             }
         }
     }

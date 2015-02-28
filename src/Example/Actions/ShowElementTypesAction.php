@@ -4,9 +4,9 @@
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-namespace Application\Actions;
+namespace Example\Actions;
 
-use Application\ProvidesFormRenderer;
+use Application\Actions\ProvidesFormRenderer;
 use Example\Forms\SignUpForm;
 use Twig_Environment as Twig;
 

@@ -27,7 +27,8 @@
         "zendframework/zend-inputfilter": "~2.3",
         "zendframework/zend-session": "~2.3",
         "zendframework/zendservice-recaptcha": "~2.0",
-        "mathiasverraes/money": "~1.2"
+        "mathiasverraes/money": "~1.2",
+        "comphppuebla/slim-modules": "~1.0"
     },
     "require-dev": {
         "phing/phing": "~2.9"

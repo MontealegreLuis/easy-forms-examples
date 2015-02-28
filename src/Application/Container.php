@@ -6,17 +6,17 @@
  */
 namespace Application;
 
-use Application\Actions\CompositeElementAction;
-use Application\Actions\EditRecordAction;
-use Application\Actions\FormConfigurationAction;
-use Application\Actions\FormValidationAction;
-use Application\Actions\IndexAction;
-use Application\Actions\ShowCaptchaAction;
-use Application\Actions\ShowCsrfTokensAction;
-use Application\Actions\ShowElementTypesAction;
-use Application\Actions\ShowLayoutAction;
 use EasyForms\Bridges\Symfony\Security\CsrfTokenProvider;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
+use Example\Actions\CompositeElementAction;
+use Example\Actions\EditRecordAction;
+use Example\Actions\FormConfigurationAction;
+use Example\Actions\FormValidationAction;
+use Example\Actions\IndexAction;
+use Example\Actions\ShowCaptchaAction;
+use Example\Actions\ShowCsrfTokensAction;
+use Example\Actions\ShowElementTypesAction;
+use Example\Actions\ShowLayoutAction;
 use Example\Configuration\AddToCartConfiguration;
 use Example\Configuration\ProductPricingConfiguration;
 use Example\Filters\AddToCartFilter;

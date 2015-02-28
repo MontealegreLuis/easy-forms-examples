@@ -12,12 +12,12 @@ use ProductCatalog\ProductCatalogServices;
 
 class ApplicationServices extends Services
 {
-    public function __construct(array $parameters)
+    protected function init()
     {
         $this
-            ->add(new TwigServiceProvider($parameters))
-            ->add(new ProductCatalogServices($parameters))
-            ->add(new ExampleServices($parameters))
+            ->add(new TwigServiceProvider())
+            ->add(new ProductCatalogServices())
+            ->add(new ExampleServices())
         ;
     }
 }

@@ -13,27 +13,18 @@ use Twig_Environment as Environment;
 
 class TwigServiceProvider implements ServiceProvider
 {
-    /** @var array */
-    protected $parameters;
-
-    /**
-     * @param array $parameters
-     */
-    public function __construct(array $parameters)
-    {
-        $this->parameters = $parameters;
-    }
-
     /**
      * @param Slim $app
+     * @param array $parameters
+     * @return void
      */
-    public function configure(Slim $app)
+    public function configure(Slim $app, array $parameters = [])
     {
-        $app->container->singleton('loader', function () {
-            return new Loader($this->parameters['twig']['loader_paths']);
+        $app->container->singleton('loader', function () use ($parameters) {
+            return new Loader($parameters['twig']['loader_paths']);
         });
-        $app->container->singleton('twig', function () use ($app) {
-            return new Environment($app->container->get('loader'), $this->parameters['twig']['options']);
+        $app->container->singleton('twig', function () use ($app, $parameters) {
+            return new Environment($app->container->get('loader'), $parameters['twig']['options']);
         });
     }
 

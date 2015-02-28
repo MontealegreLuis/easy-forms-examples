@@ -14,6 +14,8 @@ class ApplicationControllers extends Controllers
 {
     protected function init()
     {
-        $this->add(new ExampleControllers());
+        $this
+            ->add(new ExampleControllers())
+        ;
     }
 }

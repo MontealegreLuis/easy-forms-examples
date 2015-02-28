@@ -44,23 +44,13 @@ use ZendService\ReCaptcha\ReCaptcha as ReCaptchaService;
 
 class ExampleServices implements ServiceProvider
 {
-    /** @var array */
-    protected $parameters;
-
-    /**
-     * @param array $parameters
-     */
-    public function __construct(array $parameters)
-    {
-        $this->parameters = $parameters;
-    }
-
     /**
      * @param Slim $app
+     * @param array $parameters
      */
-    public function configure(Slim $app)
+    public function configure(Slim $app, array $parameters = [])
     {
-        $this->controllers($app);
+        $this->controllers($app, $parameters);
         $this->services($app);
     }
 
@@ -68,8 +58,9 @@ class ExampleServices implements ServiceProvider
      * Register this module's controllers
      *
      * @param Slim $app
+     * @param array $parameters
      */
-    protected function controllers(Slim $app)
+    protected function controllers(Slim $app, array $parameters)
     {
         $app->container->set('example.index', function () use ($app) {
             return new IndexAction($app->container->get('twig'));
@@ -94,14 +85,14 @@ class ExampleServices implements ServiceProvider
                 new InputFilterValidator(new SignUpFilter(realpath('uploads')))
             );
         });
-        $app->container->set('example.captcha', function () use ($app) {
+        $app->container->set('example.captcha', function () use ($app, $parameters) {
             return new ShowCaptchaAction(
                 $app->container->get('twig'),
-                new Image($this->parameters['captcha']['image_options']),
+                new Image($parameters['captcha']['image_options']),
                 new ReCaptcha([
                     'service' => new ReCaptchaService(
-                        $this->parameters['captcha']['recaptcha_public_key'],
-                        $this->parameters['captcha']['recaptcha_private_key'],
+                        $parameters['captcha']['recaptcha_public_key'],
+                        $parameters['captcha']['recaptcha_private_key'],
                         $params = null,
                         $options = null,
                         $ip = null,

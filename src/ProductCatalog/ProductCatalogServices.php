@@ -15,22 +15,15 @@ use Slim\Slim;
 
 class ProductCatalogServices implements ServiceProvider
 {
-    /** @var array */
-    protected $parameters;
-
     /**
+     * @param Slim $app
      * @param array $parameters
      */
-    public function __construct(array $parameters)
+    public function configure(Slim $app, array $parameters = [])
     {
-        $this->parameters = $parameters;
-    }
-
-    public function configure(Slim $app)
-    {
-        $app->container->singleton('catalog', function () {
+        $app->container->singleton('catalog', function () use ($parameters) {
             $catalog = new Catalog();
-            $seeder = new CatalogSeeder($this->parameters['products']);
+            $seeder = new CatalogSeeder($parameters['products']);
             $seeder->seed($catalog);
 
             return $catalog;

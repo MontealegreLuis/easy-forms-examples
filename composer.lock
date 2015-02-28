@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7fa8f72409905a65def060d2f591ea6",
+    "hash": "77e9b8b4e598729d0e38819776506a70",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -129,12 +129,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ComPHPPuebla/slim-modules.git",
-                "reference": "e30d38971827830b3b3865adcf832e1be22268e1"
+                "reference": "dc8c87891bce4ad2882bbb62549b9ac4202bd668"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ComPHPPuebla/slim-modules/zipball/e30d38971827830b3b3865adcf832e1be22268e1",
-                "reference": "e30d38971827830b3b3865adcf832e1be22268e1",
+                "url": "https://api.github.com/repos/ComPHPPuebla/slim-modules/zipball/dc8c87891bce4ad2882bbb62549b9ac4202bd668",
+                "reference": "dc8c87891bce4ad2882bbb62549b9ac4202bd668",
                 "shasum": ""
             },
             "require": {
@@ -147,7 +147,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -170,7 +170,7 @@
                 "modules",
                 "slim"
             ],
-            "time": "2015-02-28 15:55:34"
+            "time": "2015-02-28 20:01:21"
         },
         {
             "name": "mathiasverraes/money",

@@ -39,7 +39,7 @@ class ShowLayoutAction
      *
      * @param string $layout
      */
-    public function __invoke($layout)
+    public function switchLayout($layout)
     {
         if (!in_array($layout, ['default', 'bootstrap3', 'required', 'optional', 'inline'])) {
             Slim::getInstance()->notFound();

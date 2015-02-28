@@ -47,7 +47,7 @@ class CompositeElementAction
      *
      * @param Request $request
      */
-    public function __invoke(Request $request)
+    public function showCompositeElement(Request $request)
     {
         $this->configureFormRenderer('required');
 

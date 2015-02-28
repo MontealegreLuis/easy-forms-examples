@@ -41,7 +41,7 @@ class FormValidationAction
      *
      * @param Request $request
      */
-    public function __invoke(Request $request)
+    public function validate(Request $request)
     {
         $this->configureFormRenderer('optional');
 

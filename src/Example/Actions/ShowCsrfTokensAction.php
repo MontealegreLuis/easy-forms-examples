@@ -39,7 +39,7 @@ class ShowCsrfTokensAction
      *
      * @param Request $request
      */
-    public function __invoke(Request $request)
+    public function showCsrfToken(Request $request)
     {
         $this->configureFormRenderer('required');
 

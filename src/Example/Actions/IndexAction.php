@@ -24,7 +24,7 @@ class IndexAction
     /**
      * Show the easy forms examples index
      */
-    public function __invoke()
+    public function showIndex()
     {
         echo $this->view->render('index.html.twig');
     }

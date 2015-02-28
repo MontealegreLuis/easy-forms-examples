@@ -36,7 +36,7 @@ class EditRecordAction
     /**
      * Show the form to update a product's information
      */
-    public function __invoke()
+    public function editProduct()
     {
         $this->configureFormRenderer('required');
 

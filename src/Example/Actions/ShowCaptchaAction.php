@@ -58,13 +58,14 @@ class ShowCaptchaAction
     /**
      * Depending on the 'captchaType' argument, either show an image captcha or a ReCaptcha
      *
-     * @param Request $request
      * @param string $captchaType
+     * @param Request $request
+     * @param Slim $app
      */
-    public function __invoke(Request $request, $captchaType)
+    public function switchCaptcha($captchaType, Request $request, Slim $app)
     {
         if (!in_array($captchaType, ['re-captcha', 'image'])) {
-            Slim::getInstance()->notFound();
+            $app->notFound();
         }
 
         $this->configureFormRenderer('required');

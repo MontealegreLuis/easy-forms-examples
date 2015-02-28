@@ -58,7 +58,7 @@ class FormConfigurationAction
      *
      * @param Request $request
      */
-    public function __invoke(Request $request)
+    public function configureForm(Request $request)
     {
         $this->configureFormRenderer('required');
 

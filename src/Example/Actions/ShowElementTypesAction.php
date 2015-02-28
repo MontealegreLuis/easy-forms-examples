@@ -30,7 +30,7 @@ class ShowElementTypesAction
     /**
      * Show a form with all the available form elements
      */
-    public function __invoke()
+    public function showTypes()
     {
         $this->configureFormRenderer('optional');
 

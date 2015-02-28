@@ -8,7 +8,7 @@ namespace Example\Actions;
 
 use Application\Actions\ProvidesFormRenderer;
 use Example\Forms\ProductForm;
-use ProductCatalog\Catalog;
+use ProductCatalog\Catalog\Catalog;
 use Twig_Environment as Twig;
 
 class EditRecordAction

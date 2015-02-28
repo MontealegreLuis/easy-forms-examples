@@ -6,7 +6,7 @@
  */
 namespace Example\Configuration;
 
-use ProductCatalog\Catalog;
+use ProductCatalog\Catalog\Catalog;
 
 class ProductPricingConfiguration
 {

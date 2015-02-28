@@ -55,32 +55,46 @@ class ExampleServices implements ServiceProvider
         $this->parameters = $parameters;
     }
 
+    /**
+     * @param Slim $app
+     */
     public function configure(Slim $app)
+    {
+        $this->controllers($app);
+        $this->services($app);
+    }
+
+    /**
+     * Register this module's controllers
+     *
+     * @param Slim $app
+     */
+    protected function controllers(Slim $app)
     {
         $app->container->set('example.index', function () use ($app) {
             return new IndexAction($app->container->get('twig'));
         });
-        $app->container->set('example.show_layout', function () use ($app) {
+        $app->container->set('example.layout', function () use ($app) {
             return new ShowLayoutAction(
                 $app->container->get('twig'),
                 new TweetForm(),
                 $app->container->get('productForm')
             );
         });
-        $app->container->set('example.show_types', function () use ($app) {
+        $app->container->set('example.types', function () use ($app) {
             return new ShowElementTypesAction(
                 $app->container->get('twig'),
                 $app->container->get('signUpForm')
             );
         });
-        $app->container->set('example.show_validation', function () use ($app) {
+        $app->container->set('example.validation', function () use ($app) {
             return new FormValidationAction(
                 $app->container->get('twig'),
                 $app->container->get('signUpForm'),
                 new InputFilterValidator(new SignUpFilter(realpath('uploads')))
             );
         });
-        $app->container->set('example.show_captcha', function () use ($app) {
+        $app->container->set('example.captcha', function () use ($app) {
             return new ShowCaptchaAction(
                 $app->container->get('twig'),
                 new Image($this->parameters['captcha']['image_options']),
@@ -98,14 +112,14 @@ class ExampleServices implements ServiceProvider
                 new InputFilterValidator($app->container->get('commentFilter'))
             );
         });
-        $app->container->set('example.show_csrf_token', function () use ($app) {
+        $app->container->set('example.csrf_token', function () use ($app) {
             return new ShowCsrfTokensAction(
                 $app->container->get('twig'),
                 new LoginForm($app->container->get('tokenProvider')),
                 new InputFilterValidator(new LoginFilter($app->container->get('tokenProvider')))
             );
         });
-        $app->container->set('example.form_configuration', function () use ($app) {
+        $app->container->set('example.configuration', function () use ($app) {
             return new FormConfigurationAction(
                 $app->container->get('twig'),
                 new AddToCartForm(),
@@ -129,6 +143,15 @@ class ExampleServices implements ServiceProvider
                 $app->container->get('catalog')
             );
         });
+    }
+
+    /**
+     * Register this module's services
+     *
+     * @param Slim $app
+     */
+    protected function services(Slim $app)
+    {
         $app->container->singleton('productForm', function () {
             return new ProductForm();
         });

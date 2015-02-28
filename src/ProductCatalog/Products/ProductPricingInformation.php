@@ -4,19 +4,16 @@
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-namespace ProductCatalog;
+namespace ProductCatalog\Products;
 
-class ProductInformation
+class ProductPricingInformation
 {
     /** @var integer */
     public $productId;
 
-    /** @var float */
-    public $unitPrice;
+    /** @var \Money\Money */
+    public $costPrice;
 
-    /** @var string */
-    public $name;
-
-    /** @var string */
-    public $description;
+    /** @var \Money\Money */
+    public $salePrice;
 }

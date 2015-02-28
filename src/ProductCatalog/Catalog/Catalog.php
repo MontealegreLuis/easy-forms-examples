@@ -4,8 +4,10 @@
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-namespace ProductCatalog;
+namespace ProductCatalog\Catalog;
 
+use ProductCatalog\Products\Product;
+use ProductCatalog\Products\ProductPricing;
 use SplObjectStorage;
 
 class Catalog

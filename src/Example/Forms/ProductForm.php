@@ -10,7 +10,7 @@ use EasyForms\Elements\Hidden;
 use EasyForms\Elements\Text;
 use EasyForms\Elements\TextArea;
 use EasyForms\Form;
-use ProductCatalog\ProductInformation;
+use ProductCatalog\Products\ProductInformation;
 
 /**
  * This form is used to demonstrate the combination of a custom layout with an inline layout

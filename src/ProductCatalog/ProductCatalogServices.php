@@ -9,6 +9,8 @@
 namespace ProductCatalog;
 
 use ComPHPPuebla\Slim\ServiceProvider;
+use ProductCatalog\Catalog\Catalog;
+use ProductCatalog\Catalog\CatalogSeeder;
 use Slim\Slim;
 
 class ProductCatalogServices implements ServiceProvider

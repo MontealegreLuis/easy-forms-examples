@@ -11,7 +11,7 @@ use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
 use Example\Forms\ProductPricingForm;
 use Money\Currency;
 use Money\Money;
-use ProductCatalog\Catalog;
+use ProductCatalog\Catalog\Catalog;
 use Slim\Http\Request;
 use Twig_Environment as Twig;
 

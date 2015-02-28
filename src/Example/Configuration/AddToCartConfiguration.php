@@ -6,8 +6,9 @@
  */
 namespace Example\Configuration;
 
-use ProductCatalog\Catalog;
-use ProductCatalog\ProductInformation;
+use ProductCatalog\Catalog\Catalog;
+use ProductCatalog\Products\ProductInformation;
+
 
 class AddToCartConfiguration
 {

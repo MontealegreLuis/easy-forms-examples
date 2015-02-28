@@ -9,7 +9,7 @@ namespace Example\Forms;
 use EasyForms\Form;
 use Example\Configuration\ProductPricingConfiguration;
 use Example\Elements\Money;
-use ProductCatalog\ProductPricingInformation;
+use ProductCatalog\Products\ProductPricingInformation;
 
 class ProductPricingForm extends Form
 {

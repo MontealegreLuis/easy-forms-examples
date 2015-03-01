@@ -71,9 +71,23 @@ class MoneyFilter extends InputFilter
      */
     public function setData($data)
     {
+        $data['original_amount'] = $data['amount'];
         $data['amount'] = $data['amount'] * 100;
 
         parent::setData($data);
+    }
+
+    /**
+     * Use the original value with the decimal point
+     *
+     * @return array
+     */
+    public function getValues()
+    {
+        $values = parent::getValues();
+        $values['amount'] = $this->data['original_amount'];
+
+        return $values;
     }
 
     /**

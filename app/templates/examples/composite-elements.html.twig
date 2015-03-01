@@ -35,7 +35,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Update product pricing</div>
                 <div class="panel-body">
-                    {% if isValid %}
+                    {% if isValid|default(false) %}
                         <p class="lead bg-success text-center">Everything passed validation!</p>
                     {% endif %}
 

@@ -6,13 +6,12 @@
  */
 namespace Example\Actions;
 
+use Application\Actions\FormRequest;
 use Application\Actions\ProvidesFormRenderer;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
 use Example\Forms\ProductPricingForm;
-use Money\Currency;
-use Money\Money;
 use ProductCatalog\Catalog\Catalog;
-use Slim\Http\Request;
+use ProductCatalog\Catalog\UpdatePricingRequest;
 use Twig_Environment as Twig;
 
 class CompositeElementAction
@@ -44,33 +43,36 @@ class CompositeElementAction
 
     /**
      * Show the form to update a product's information
-     *
-     * @param Request $request
      */
-    public function showCompositeElement(Request $request)
+    public function showForm()
     {
         $this->configureFormRenderer('required');
 
-        $isValid = false;
         $pricing = $this->catalog->pricingFor($productId = 1);
-
-        if ($request->isPost()) {
-            $this->form->submit($request->post());
-            if ($isValid = $this->validator->validate($this->form)) {
-                $information = $this->form->values();
-                $pricing->update(
-                    new Money((int) $information['cost_price']['amount'], new Currency($information['cost_price']['currency'])),
-                    new Money((int) $information['sale_price']['amount'], new Currency($information['sale_price']['currency']))
-                );
-                $this->catalog->updatePrice($pricing);
-            }
-        }
-
         $this->form->populateFrom($pricing->information());
 
         echo $this->view->render('examples/composite-elements.html.twig', [
-            'isValid' => $isValid,
             'form' => $this->form->buildView(),
+        ]);
+    }
+
+    /**
+     * @param FormRequest $request
+     */
+    public function processForm(FormRequest $request)
+    {
+        $this->configureFormRenderer('required');
+
+        if ($isValid = $request->isValid()) {
+            $pricingRequest = new UpdatePricingRequest($request->validValues());
+            $pricing = $this->catalog->pricingFor($productId = 1);
+            $pricing->update($pricingRequest->costPrice, $pricingRequest->salePrice);
+            $this->catalog->updatePrice($pricing);
+        }
+
+        echo $this->view->render('examples/composite-elements.html.twig', [
+            'form' => $request->form(),
+            'isValid' => $isValid,
         ]);
     }
 }

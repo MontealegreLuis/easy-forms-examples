@@ -1,4 +1,5 @@
 app/config.php
 bin/
 local.build.properties
+public/assets/vendor/
 vendor/

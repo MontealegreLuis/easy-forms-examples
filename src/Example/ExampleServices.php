@@ -11,6 +11,7 @@ namespace Example;
 use ComPHPPuebla\Slim\ServiceProvider;
 use EasyForms\Bridges\Symfony\Security\CsrfTokenProvider;
 use EasyForms\Bridges\Zend\InputFilter\InputFilterValidator;
+use Example\Actions\ChangeAvatarAction;
 use Example\Actions\CompositeElementAction;
 use Example\Actions\EditRecordAction;
 use Example\Actions\FormConfigurationAction;
@@ -28,6 +29,7 @@ use Example\Filters\LoginFilter;
 use Example\Filters\ProductPricingFilter;
 use Example\Filters\SignUpFilter;
 use Example\Forms\AddToCartForm;
+use Example\Forms\ChangeAvatarForm;
 use Example\Forms\LoginForm;
 use Example\Forms\ProductForm;
 use Example\Forms\ProductPricingForm;
@@ -62,30 +64,30 @@ class ExampleServices implements ServiceProvider
      */
     protected function controllers(Slim $app, array $parameters)
     {
-        $app->container->set('example.index', function () use ($app) {
+        $app->container->singleton('example.index', function () use ($app) {
             return new IndexAction($app->container->get('twig'));
         });
-        $app->container->set('example.layout', function () use ($app) {
+        $app->container->singleton('example.layout', function () use ($app) {
             return new ShowLayoutAction(
                 $app->container->get('twig'),
                 new TweetForm(),
                 $app->container->get('productForm')
             );
         });
-        $app->container->set('example.types', function () use ($app) {
+        $app->container->singleton('example.types', function () use ($app) {
             return new ShowElementTypesAction(
                 $app->container->get('twig'),
                 $app->container->get('signUpForm')
             );
         });
-        $app->container->set('example.validation', function () use ($app) {
+        $app->container->singleton('example.validation', function () use ($app) {
             return new FormValidationAction(
                 $app->container->get('twig'),
                 $app->container->get('signUpForm'),
                 new InputFilterValidator(new SignUpFilter(realpath('uploads')))
             );
         });
-        $app->container->set('example.captcha', function () use ($app, $parameters) {
+        $app->container->singleton('example.captcha', function () use ($app, $parameters) {
             return new ShowCaptchaAction(
                 $app->container->get('twig'),
                 new Image($parameters['captcha']['image_options']),
@@ -103,14 +105,14 @@ class ExampleServices implements ServiceProvider
                 new InputFilterValidator($app->container->get('commentFilter'))
             );
         });
-        $app->container->set('example.csrf_token', function () use ($app) {
+        $app->container->singleton('example.csrf_token', function () use ($app) {
             return new ShowCsrfTokensAction(
                 $app->container->get('twig'),
                 new LoginForm($app->container->get('tokenProvider')),
                 new InputFilterValidator(new LoginFilter($app->container->get('tokenProvider')))
             );
         });
-        $app->container->set('example.configuration', function () use ($app) {
+        $app->container->singleton('example.configuration', function () use ($app) {
             return new FormConfigurationAction(
                 $app->container->get('twig'),
                 new AddToCartForm(),
@@ -119,20 +121,23 @@ class ExampleServices implements ServiceProvider
                 new InputFilterValidator($app->container->get('addToCartFilter'))
             );
         });
-        $app->container->set('example.edit_record', function () use ($app) {
+        $app->container->singleton('example.edit_record', function () use ($app) {
             return new EditRecordAction(
                 $app->container->get('twig'),
                 $app->container->get('productForm'),
                 $app->container->get('catalog')
             );
         });
-        $app->container->set('example.composite_element', function () use ($app) {
+        $app->container->singleton('example.composite_element', function () use ($app) {
             return new CompositeElementAction(
                 $app->container->get('twig'),
                 $app->container->get('pricingForm'),
                 new InputFilterValidator($app->container->get('pricingFilter')),
                 $app->container->get('catalog')
             );
+        });
+        $app->container->singleton('example.upload_progress', function() use ($app) {
+            return new ChangeAvatarAction($app->container->get('twig'), new ChangeAvatarForm());
         });
     }
 

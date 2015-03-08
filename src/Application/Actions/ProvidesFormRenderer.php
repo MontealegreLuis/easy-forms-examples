@@ -4,7 +4,7 @@
  *
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-namespace Application\actions;
+namespace Application\Actions;
 
 use EasyForms\Bridges\Twig\BlockOptions;
 use EasyForms\Bridges\Twig\FormExtension;

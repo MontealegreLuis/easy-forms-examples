@@ -1,0 +1,9 @@
+{{ form_start(profile) }}
+
+{{ element_row(profile.avatar, {'label': 'Avatar', 'attr': {'id': 'avatar'}, 'options': options}) }}
+
+<button type="submit" class="btn btn-default">
+    <span class="glyphicon glyphicon-user"></span> Change your avatar
+</button>
+
+{{ form_end() }}

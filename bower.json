@@ -1,0 +1,22 @@
+{
+  "name": "easyforms",
+  "version": "0.0.1",
+  "homepage": "https://github.com/MontealegreLuis/easy-forms-examples",
+  "authors": [
+    "Luis Montealegre <montealegreluis@gmail.com>"
+  ],
+  "description": "Examples for package comphppuebla/easyforms",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2",
+    "requirejs": "~2.1.16"
+  }
+}

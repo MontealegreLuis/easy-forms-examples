@@ -40,5 +40,6 @@ class ExampleControllers implements ControllerProvider
                 )];
             }
         ));
+        $app->get('/upload-progress', $resolver->resolve($app, 'example.upload_progress:changeAvatar'));
     }
 }

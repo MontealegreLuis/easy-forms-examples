@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}/ Frontend integration{% endblock %}
+
+{# Use this template as an inline layout #}
+{% form_theme [_self] %}
+
+{# Custom block #}
+{%- block progress_file -%}
+    <div class="form-inline">
+        <div class="progress-upload">
+            {%- set options = options|merge({'block': 'input'}) -%}
+            {{- element(element, attr, options) -}}
+        </div>
+    </div>
+{%- endblock progress_file -%}
+
+{% block scripts %}
+    <script>
+        var button = '<button type="button" id="replace" class="btn btn-default"><span class="glyphicon glyphicon-upload"></span> Select your new avatar</button>';
+        var text = '<input type="text" class="form-control" disabled id="replace-text">';
+        var $avatar = $('#avatar');
+        $avatar.addClass('hidden');
+        $avatar.after(button);
+        $avatar.after(text);
+        $('.upload').addClass('form-inline');
+        $avatar.on('change', function(){
+            $('#replace-text').val($avatar.val());
+        });
+        $('#replace').on('click', function() {
+            $avatar.click();
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Welcome!</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="lead">This example shows the interaction with frontend components.</p>
+            <div class="panel panel-default">
+                <div class="panel-heading">Profile</div>
+                <div class="panel-body">
+                    {% set options = {'block': 'progress_file'} %}
+                    {% include 'forms/change-avatar.html.twig' %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

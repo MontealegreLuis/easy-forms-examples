@@ -16,21 +16,8 @@
 {%- endblock progress_file -%}
 
 {% block scripts %}
-    <script>
-        var button = '<button type="button" id="replace" class="btn btn-default"><span class="glyphicon glyphicon-upload"></span> Select your new avatar</button>';
-        var text = '<input type="text" class="form-control" disabled id="replace-text">';
-        var $avatar = $('#avatar');
-        $avatar.addClass('hidden');
-        $avatar.after(button);
-        $avatar.after(text);
-        $('.upload').addClass('form-inline');
-        $avatar.on('change', function(){
-            $('#replace-text').val($avatar.val());
-        });
-        $('#replace').on('click', function() {
-            $avatar.click();
-        });
-    </script>
+    <script src="/assets/vendor/requirejs/require.js" data-main="main"></script>
+    <script src="/assets/js/config.js"></script>
 {% endblock %}
 
 {% block content %}

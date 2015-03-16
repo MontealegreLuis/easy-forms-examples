@@ -5,6 +5,8 @@ requirejs.config({
     baseUrl: '/assets/js',
     paths: {
         'jquery': '../vendor/jquery/dist/jquery.min',
-        'page': 'src/page'
+        'flight': '../vendor/flight',
+        'pages': 'src/pages',
+        'components': 'src/components'
     }
 });

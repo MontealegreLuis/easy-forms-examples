@@ -1,17 +1,9 @@
-/**
- * This source file is subject to the license that is bundled with this package in the file LICENSE.
- */
-define([
-    /* Third party dependencies */
-    'jquery'
-], function ($) {
-    'use strict';
+define(['flight/lib/component'], function(defineComponent) {
 
-    var ChangeAvatarPage = function() {
-        /**
-         * Module's initialization method
-         */
-        this.init = function() {
+    var UiFileUploadProgress = function() {
+        'use strict';
+
+        this.setUpUploadProgress = function () {
             var button = '<button type="button" id="replace" class="btn btn-default"><span class="glyphicon glyphicon-upload"></span> Select your new avatar</button>';
             var text = '<input type="text" class="form-control" disabled id="replace-text">';
             var $avatar = $('#avatar');
@@ -26,10 +18,11 @@ define([
                 $avatar.click();
             });
         }
+
+        this.after('initialize', function() {
+            this.setUpUploadProgress();
+        });
     };
 
-    /**
-     * Module exports
-     */
-    return ChangeAvatarPage;
+    return defineComponent(UiFileUploadProgress);
 });

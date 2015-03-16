@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.2",
-    "requirejs": "~2.1.16"
+    "requirejs": "~2.1.16",
+    "flight": "~1.5.0"
   }
 }

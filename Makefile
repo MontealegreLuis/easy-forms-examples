@@ -5,6 +5,7 @@ SHELL = /bin/bash
 install:
 	@echo "Installing dependencies..."
 	composer install
+	bower install
 
 config:
 	@echo "Creating configuration file..."

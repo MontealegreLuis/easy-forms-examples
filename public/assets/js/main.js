@@ -4,10 +4,16 @@
 'use strict';
 
 require([
-        'page/ChangeAvatarPage'
+        'flight/lib/compose',
+        'flight/lib/registry',
+        'flight/lib/advice',
+        'pages/ChangeAvatarPage'
     ],
-    function (ChangeAvatarPage) {
+    function (compose, registry, advice, ChangeAvatarPage) {
         var page = new ChangeAvatarPage();
+
+        compose.mixin(registry, [advice.withAdvice]);
+
         page.init();
     }
 );
